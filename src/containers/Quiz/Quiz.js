@@ -31,27 +31,6 @@ class Quiz extends Component {
 					{ text: '1703', id: 3 },
 					{ text: '1803', id: 4 },
 				]
-			},
-			{
-				question: 'Сколько планет в солнечной системе?',
-				rightAnswerId: 4,
-				id: 3,
-				answers: [
-					{ text: '9', id: 1 },
-					{ text: '6', id: 2 },
-					{ text: '11', id: 3 },
-					{ text: '8', id: 4 },
-				]
-			},
-			{
-				question: 'Кто ты?',
-				rightAnswerId: 1,
-				id: 4,
-				answers: [
-					{ text: 'Заяц', id: 1 },
-					{ text: 'Волк', id: 2 },
-					{ text: 'Медведь', id: 3 },
-				]
 			}
 		],
 	}
