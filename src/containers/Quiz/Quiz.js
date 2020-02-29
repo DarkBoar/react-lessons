@@ -42,6 +42,16 @@ class Quiz extends Component {
 					{ text: '11', id: 3 },
 					{ text: '8', id: 4 },
 				]
+			},
+			{
+				question: 'Кто ты?',
+				rightAnswerId: 1,
+				id: 4,
+				answers: [
+					{ text: 'Заяц', id: 1 },
+					{ text: 'Волк', id: 2 },
+					{ text: 'Медведь', id: 3 },
+				]
 			}
 		],
 	}
