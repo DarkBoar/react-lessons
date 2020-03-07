@@ -5,13 +5,14 @@ import Quiz from "./containers/Quiz/Quiz";
 import QuizList from "./containers/QuizList/QuizList";
 import Auth from "./containers/Auth/Auth";
 import QuizCreator from "./containers/QuizCreator/QuizCreator";
-
+import Register from './containers/Register/Register';
 
 function App() {
   return (
     <Layout>
       <Switch>
         <Route path="/auth" component={Auth} />
+        <Route path="/register" component={Register} />
         <Route path="/quiz-creator" component={QuizCreator} />
         <Route path="/quiz/:id" component={Quiz} />
         <Route path="/" component={QuizList} />

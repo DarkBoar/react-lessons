@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import classes from "./Drawer.module.css";
 import { NavLink } from "react-router-dom";
-import Backdrop from "../../UI/Backdrop/Backdrop";
 
 const links = [
   {
     to: '/',
-    label: 'Список',
+    label: 'Список тестов',
     exact: true
   },
   {
@@ -23,10 +22,6 @@ const links = [
 
 class Drawer extends Component {
 
-  clickHandler = () => {
-    this.props.onClose();
-  }
-
   renderLinks = () => {
     return links.map((item, index) => {
       return (
@@ -35,7 +30,6 @@ class Drawer extends Component {
             to={item.to}
             exact={item.exact}
             activeClassName={classes.active}
-            onClick={this.clickHandler}
           >
             {item.label}
           </NavLink>
@@ -45,22 +39,15 @@ class Drawer extends Component {
   }
 
   render() {
-    const cls = [
-      classes.Drawer
-    ]
-
-    if (!this.props.isOpen) {
-      cls.push(classes.close)
-    }
 
     return (
       <React.Fragment>
-        <nav className={cls.join(" ")}>
+        <nav className={classes.Drawer}>
+          <div className={classes.menuTitle}>Меню</div>
           <ul>
             {this.renderLinks()}
           </ul>
         </nav>
-        { !this.props.isOpen ? null : <Backdrop onClick={this.props.onClose} /> } 
       </React.Fragment>
     )
   }

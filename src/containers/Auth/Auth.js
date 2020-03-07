@@ -4,6 +4,7 @@ import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
 import is from "is_js";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 export default class Auth extends Component {
 
@@ -12,8 +13,7 @@ export default class Auth extends Component {
       email: {
         value: "",
         type: "email",
-        label: "Email",
-        errorMessage: "Введите корректный email",
+        placeholder: "Электронная почта",
         valid: false,
         touched: false,
         validation: {
@@ -24,8 +24,7 @@ export default class Auth extends Component {
       password: {
         value: "",
         type: "password",
-        label: "Пароль",
-        errorMessage: "Введите корректный пароль",
+        placeholder: "Пароль",
         valid: false,
         touched: false,
         validation: {
@@ -51,22 +50,6 @@ export default class Auth extends Component {
     }
   };
 
-  registerHandler = async () => {
-    const authData = {
-      email: this.state.formControls.email.value,
-      password: this.state.formControls.password.value,
-      returnSecureToken: true,
-    }
-    try {
-      const response =  await Axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBHhnwoRYlS3nePNyT5c9ZcixVvCjrqtSQ', authData);
-    
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
-
-  };
-
   onSubmitHandler = (event) => {
     event.preventDefault();
   };
@@ -86,7 +69,6 @@ export default class Auth extends Component {
     if (validation.minLength) {
       isValid = value.length >= validation.minLength && isValid 
     }
-
     return isValid;
   }
 
@@ -118,12 +100,11 @@ export default class Auth extends Component {
         <Input
           key={controlName + index}
           type={control.type}
+          placeholder={control.placeholder}
           value={control.value}
           valid={control.valid}
           touched={control.touched}
-          label={control.label}
           shouldValidate={!!control.validation}
-          errorMessage={control.errorMessage}
           onChange={event => this.onChangeHandler(event, controlName)}
         />
       )
@@ -135,6 +116,7 @@ export default class Auth extends Component {
       <div className={classes.Auth}>
         <div>
           <h1>Авторизация</h1>
+          <p>Авторизуйтесь, чтобы пользоваться программой</p>
           <form onSubmit={this.onSubmitHandler} className={classes.AuthForm}>
             {this.renderInputs()}
             <Button
@@ -144,13 +126,10 @@ export default class Auth extends Component {
             >
               Войти
             </Button>
-            <Button
-              type="primary" 
-              onClick={this.registerHandler}
-              disabled={!this.state.isFormValid}
-            >
-              Регистрация
-            </Button>
+            <div className={classes.bottomAuth}>Еще не зарегистрированы?</div>
+            <Link to={"/register"} className={classes.enter}>
+              Зарегистрироваться
+            </Link>
           </form>
         </div>
       </div>

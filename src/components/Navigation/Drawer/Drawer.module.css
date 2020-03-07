@@ -3,17 +3,9 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 80%;
-  max-width: 300px;
-  padding: 20px 10px;
+  padding: 100px 50px;
   box-sizing: border-box;
-  background: #fff;
-  z-index: 90;
-  transform: translateX(0px);
-  transition: transform .22s ease-in;
-}
-.Drawer.close {
-  transform: translateX(-300px);
+  background: #F5F5FA;
 }
 .Drawer ul {
   list-style: none;
@@ -21,17 +13,24 @@
   padding: 0;
 }
 .Drawer ul li {
-  margin-bottom: 15px;
+  margin-bottom: 33px;
 }
 .Drawer ul li a {
   text-decoration: none;
-  color: #363d54;
-  font-size: 30px;
-  background-color: #fff;
+  color: #334D6E;
+  font-size: 14px;
+  line-height: 16px;
   position: relative;
-  padding: 0 20px 10px 20px;
   transition: .3s;
+  padding-left: 32px;
 }
-.Drawer ul li a:hover, .active {
-  opacity: .7;
+.Drawer ul li a:hover,
+.Drawer ul li .active {
+  color: #109CF1;
+}
+.Drawer .menuTitle {
+  font-size: 18px;
+  line-height: 23px;
+  color: #109CF1;
+  margin-bottom: 140px;
 }

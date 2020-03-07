@@ -1,11 +1,11 @@
-.Auth {
+.Register {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 100%;
 }
-.Auth h1 {
+.Register h1 {
   font-weight: 900;
   font-size: 50px;
   line-height: 55px;
@@ -15,11 +15,16 @@
   color: #000000;
   margin: 0;
 }
-.Auth .inputActive,
-.Auth input:focus {
+.RegisterForm {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 370px;
+}
+.Register .inputRegister,
+.Register input:focus {
   border: 1px solid #109CF1;
 }
-.Auth p {
+.Register p {
   font-weight: 300;
   font-size: 24px;
   line-height: 26px;
@@ -28,23 +33,23 @@
   color: #000000;
   margin: 20px 0;
 }
-.AuthForm {
-  margin: 0 auto;
-  width: 100%;
-  max-width: 370px;
-}
-.bottomAuth {
+.bottomRegister {
   text-align: center;
   margin: 20px 0;
   font-size: 16px;
   line-height: 100%;
   color: #BEBEBE;
 }
-.Auth .enter {
+.Register .enter {
   display: block;
   text-align: center;
   text-decoration: none;
   font-size: 16px;
   line-height: 16px;
   color: #109CF1;
+}
+.success {
+  color: #FFFFFF;
+  background: #109CF1;
+  border-radius: 10px;
 }
