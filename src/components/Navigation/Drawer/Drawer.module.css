@@ -13,16 +13,18 @@
   padding: 0;
 }
 .Drawer ul li {
+  display: flex;
+  align-items: center;
   margin-bottom: 33px;
 }
 .Drawer ul li a {
+  padding-left: 15px;
   text-decoration: none;
   color: #334D6E;
   font-size: 14px;
   line-height: 16px;
   position: relative;
   transition: .3s;
-  padding-left: 32px;
 }
 .Drawer ul li a:hover,
 .Drawer ul li .active {
