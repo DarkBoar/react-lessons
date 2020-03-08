@@ -45,14 +45,26 @@
   color: #109CF1;
 }
 .FinishedQuiz ul li {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
   font-size: 24px;
   line-height: 26px;
   letter-spacing: 0.02em;
   color: #000000;
+  margin-bottom: 10px;
 }
 .success {
-  color: rgba(161, 240, 69, 1);
+  color: #109CF1;
+  font-size: 24px;
+  line-height: 26px;
+  text-align: right;
+  letter-spacing: 0.02em;
 }
 .error {
-  color: rgba(240, 87, 108, 1);
+  color: #FF0000;
+  font-size: 24px;
+  line-height: 26px;
+  text-align: right;
+  letter-spacing: 0.02em;
 }

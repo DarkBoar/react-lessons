@@ -17,7 +17,6 @@ const ActiveQuiz = props => {
       <AnswersList
         answers={props.answers}
         state={props.stateAnswer}
-        stateAnswer={props.state}
         handleAnswer={props.handleAnswer}
       />
 

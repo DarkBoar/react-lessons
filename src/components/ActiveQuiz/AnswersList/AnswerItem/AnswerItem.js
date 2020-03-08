@@ -7,9 +7,6 @@ const AnswerItem = props => {
   if (props.state) {
     cls.push(props.state)
   }
-  if (props.stateAnswer) {
-    cls.push(props.stateAnswer)
-  }
 
   return (
     <li

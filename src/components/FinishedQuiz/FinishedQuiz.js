@@ -18,15 +18,13 @@ const FinishedQuiz = props => {
       <ul>
         {
           props.quiz.map((quizItem, index) => {
-            const cls = [
-              'fa',
-              props.results[quizItem.id] === 'error' ? 'fa-times' : 'fa-check',
-              classes[props.results[quizItem.id]]
-            ];
+            const cls = props.results[quizItem.id] === 'error'
+            ? <span className={classes.error}>Неправильно</span>
+            : <span className={classes.success}>Правильно</span>;
             return (
               <li key={index}>
                 {quizItem.question}
-                <i className={cls.join(' ')}></i>
+                {cls}
               </li>
             )
           })
