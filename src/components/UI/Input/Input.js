@@ -8,6 +8,9 @@ const Input = (props) => {
 
   return (
     <div className={cls.join(" ")}>
+      {
+        props.label ? <label>{props.label}</label> : null
+      }
       <input
         type={props.type}
         placeholder={props.placeholder}

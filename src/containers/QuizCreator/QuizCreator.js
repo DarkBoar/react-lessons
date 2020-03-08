@@ -8,11 +8,12 @@ import axios from "axios";
 
 function createOptionControl(number) {
   return createControl({
-    label: `Вариант ${number}`,
+    label: `Ответ ${number}`,
     errorMessage: "Значение не может быть пустым",
     id: number
   }, {required: true})
 }
+
 function createFormControl() {
   return {
     question: createControl({
@@ -104,7 +105,7 @@ class QuizCreator extends Component {
     return Object.keys(this.state.formControls).map((controlName, index) => {
       const control = this.state.formControls[controlName];
       return (
-        <React.Fragment key={index}>
+        <li key={index}>
         <Input
           label={control.label}
           value={control.value}
@@ -114,8 +115,7 @@ class QuizCreator extends Component {
           errorMessage={control.errorMessage}
           onChange={event => this.changeHandler(event.target.value, controlName)}
         />
-        {index === 0 ? <hr /> : null}
-        </React.Fragment>
+        </li>
       )
     })
   }
@@ -132,38 +132,41 @@ class QuizCreator extends Component {
       value={this.state.rightAnswerId}
       onChange={this.selectChangeHandler}
       options={[
-        {text: 1, value: 1},
-        {text: 2, value: 2},
-        {text: 3, value: 3},
-        {text: 4, value: 4}
+        {text: "Ответ 1", value: 1},
+        {text: "Ответ 2", value: 2},
+        {text: "Ответ 3", value: 3},
+        {text: "Ответ 4", value: 4}
       ]}
     />
 
     return (
       <div className={classes.QuizCreator}>
         <div>
-          <h1>QuizCreator</h1>
+          <h1>Создать тест</h1>
 
           <form onSubmit={this.submitHandler}>
-
-            {this.renderControls()}
-
+            <ul>
+              {this.renderControls()}
+            </ul>
             {select}
-
-            <Button
-              type="primary"
-              onClick={this.addQuestionHandler}
-              disabled={!this.state.isFormValid}
-            >
-              Добавить вопрос
-            </Button>
-            <Button
-              type="success"
-              onClick={this.createQuizHandler}
-              disabled={this.state.quiz.length === 0}
-            >
-              Создать тест
-            </Button>
+            <div className={classes.bottomFlex}>
+              <Button
+                type="success"
+                onClick={this.createQuizHandler}
+                disabled={this.state.quiz.length === 0}
+              >
+                Создать тест
+              </Button>
+              {
+                this.state.isFormValid
+                ? <p
+                    onClick={this.addQuestionHandler}
+                  >
+                    Добавить еще один вопрос
+                  </p>
+                : null
+              }
+            </div>
           </form>
         </div>
       </div>
