@@ -1,17 +1,31 @@
 .Answeritem {
-  border: 1px solid white;
-  border-radius: 5px;
-  padding: 5px 10px;
-  margin-bottom: 5px;
+  width: 100%;
+  max-width: 370px;
   cursor: pointer;
+  background: #FDFDFD;
+  border: 1px solid #E3E3E3;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 50px;
+  color: #334D6E;
+  padding-left: 15px;
+  margin-bottom: 15px;
 }
 .Answeritem:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transition: background .3s ease-in-out;
+  border: 1px solid #109CF1;
+  color: #109CF1;
+}
+.Answeritem.active {
+  color: #109CF1;
+  border: 1px solid #109CF1;
 }
 .Answeritem.success {
-  background: rgba(161, 240, 69, .7);
+  background: #109CF1;
+  color: #fff;
 }
 .Answeritem.error {
-  background: rgba(240, 87, 108, .7);
+  border: 1px solid #FF0000;
+  color: #FF0000;
 }

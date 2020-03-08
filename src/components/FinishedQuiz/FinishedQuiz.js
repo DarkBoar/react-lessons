@@ -13,10 +13,11 @@ const FinishedQuiz = props => {
 
   return (
     <div className={classes.FinishedQuiz}>
+      <h2>Ваш результат</h2>
+      <p>Правильно {successCount} из {props.quiz.length}</p>
       <ul>
         {
           props.quiz.map((quizItem, index) => {
-            console.log(quizItem)
             const cls = [
               'fa',
               props.results[quizItem.id] === 'error' ? 'fa-times' : 'fa-check',
@@ -24,7 +25,6 @@ const FinishedQuiz = props => {
             ];
             return (
               <li key={index}>
-                <strong>{index + 1}. </strong>
                 {quizItem.question}
                 <i className={cls.join(' ')}></i>
               </li>
@@ -32,12 +32,11 @@ const FinishedQuiz = props => {
           })
         }
       </ul>
-      <p>Правильно {successCount} из {props.quiz.length}</p>
-      <div>
-        <Button onClick={props.onRetry} type="primary">Повторить</Button>
+      <div className={classes.bottomBtn}>
         <Link to={'/'}>
           <Button type="success">Перейти в список тестов</Button>
         </Link>
+        <div onClick={props.onRetry}>Пройти тест еще раз</div>
       </div>
     </div>
   )

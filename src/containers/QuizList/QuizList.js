@@ -46,8 +46,9 @@ class QuizList extends Component {
   render() {
     return (
       <div className={classes.QuizList}>
-        <div>
+        <div className={classes.quizContainer}>
           <h1>Список тестов</h1>
+          <p>Пройдите тесты</p>
           { this.state.loading
             ? <Loader/>
             : <ul>

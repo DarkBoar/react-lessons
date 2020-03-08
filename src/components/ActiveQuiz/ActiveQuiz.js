@@ -1,23 +1,43 @@
 import React from "react";
 import './ActiveQuiz.css';
 import AnswersList from "./AnswersList/AnswersList";
+import Button from "../UI/Button/Button";
 
 const ActiveQuiz = props => {
+
   return (
     <div className="ActiveQuiz">
       <p className="Question">
         <span>
-          <strong>{props.answerNumber}. </strong>
           {props.question}
         </span>
-        <small>{props.answerNumber} из {props.questionLength}</small>
+        <small>{props.answerNumber}/{props.questionLength}</small>
       </p>
 
       <AnswersList
-        state={props.state}
         answers={props.answers}
-        onAnswerClick={props.onAnswerClick}
+        state={props.stateAnswer}
+        stateAnswer={props.state}
+        handleAnswer={props.handleAnswer}
       />
+
+      <div>
+        { props.answerNextBtn
+          ? <Button
+              type="success"
+              onClick={props.onAnswerNext}
+            >
+              Следующий вопрос
+            </Button>
+          : <Button
+              type="success"
+              disabled={!props.answerNext}
+              onClick={() => props.onAnswerSuccess(props.stateAnswer)}
+            >
+              Ответить
+            </Button>
+        }
+      </div>
     </div>
   )
 }

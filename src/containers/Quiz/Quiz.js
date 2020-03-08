@@ -11,56 +11,66 @@ class Quiz extends Component {
 		isFinished: false,
 		activeQuestion: 0,
 		answerState: null,
+		answerNext: false,
+		answerStateQuestion: null,
+		answerNextBtn: false,
 		quiz: [],
 		loading: true
 	}
 
 	onAnswerClickHandler = (answerId) => {
-		if (this.state.answerState) {
-			const key = Object.keys(this.state.answerState)[0]
-			if (this.state.answerState[key] === 'success') {
-				return
-			}
-		}
+		this.setState({
+			answerNext: true,
+			answerState: answerId
+		})
+	}
 
+	onAnswerSuccess = (answerId) => {
 		const question = this.state.quiz[this.state.activeQuestion];
 		const results = this.state.results;
-
+		
 		if (question.rightAnswerId === answerId) {
 			if (!results[question.id]) {
 				results[question.id] = 'success';
 			}
-
 			this.setState({
-				answerState: { [answerId]: 'success' },
+				answerStateQuestion: { [answerId]: 'success' },
 				results,
 			})
-
-			const timeout = window.setTimeout(() => {
-				if (this.isQuizFinished()) {
-					this.setState({
-						isFinished: true,
-					})
-				} else {
-					this.setState({
-						activeQuestion: this.state.activeQuestion + 1,
-						answerState: null,
-					})
-				}
-				window.clearTimeout(timeout)
-			}, 500)
 		} else {
 			results[question.id] = 'error';
 			this.setState({
-				answerState: { [answerId]: 'error' },
+				answerStateQuestion: { [answerId]: 'error' },
 				results,
 			})
 		}
+		this.setState({
+			answerNextBtn: true
+		})
 	}
+
+	onAnswerClickNext = () => {
+		if (this.isQuizFinished()) {
+			this.setState({
+				isFinished: true,
+			})
+		} else {
+			this.setState({
+				activeQuestion: this.state.activeQuestion + 1,
+				answerState: null,
+			})
+		}
+		this.setState({
+			answerNextBtn: false,
+			answerNext: false,
+		})
+	}
+
 
 	isQuizFinished() {
 		return this.state.activeQuestion + 1 === this.state.quiz.length
 	}
+
 	retryHandler = () => {
 		this.setState({
 			activeQuestion: 0,
@@ -85,10 +95,10 @@ class Quiz extends Component {
 	}
 
 	render() {
+
 		return (
 			<div className="Quiz">
 				<div className="QuizWrapper">
-					<h1>Ответьте на все вопросы</h1>
 					{
 						this.state.loading
 						? <Loader />
@@ -98,14 +108,22 @@ class Quiz extends Component {
 									quiz={this.state.quiz}
 									onRetry={this.retryHandler}
 								/>
-							: <ActiveQuiz
+							: <>
+								<h1>Ответьте на все вопросы</h1>
+								<ActiveQuiz
 								answers={this.state.quiz[this.state.activeQuestion].answers}
 								question={this.state.quiz[this.state.activeQuestion].question}
-								onAnswerClick={this.onAnswerClickHandler}
+								handleAnswer={this.onAnswerClickHandler}
+								onAnswerNext={this.onAnswerClickNext}
+								onAnswerSuccess={this.onAnswerSuccess}
 								questionLength={this.state.quiz.length}
 								answerNumber={this.state.activeQuestion + 1}
-								state={this.state.answerState}
+								stateAnswer={this.state.answerState}
+								state={this.state.answerStateQuestion}
+								answerNext={this.state.answerNext}
+								answerNextBtn={this.state.answerNextBtn}
 								/>
+								</>
 						}
 				</div>
 			</div>
