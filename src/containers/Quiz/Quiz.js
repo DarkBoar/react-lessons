@@ -14,6 +14,7 @@ class Quiz extends Component {
 		answerNext: false,
 		answerStateQuestion: null,
 		answerNextBtn: false,
+		answerTotal: null,
 		quiz: [],
 		loading: true
 	}
@@ -35,12 +36,14 @@ class Quiz extends Component {
 			}
 			this.setState({
 				answerStateQuestion: { [answerId]: 'success' },
+				answerTotal: 'success',
 				results,
 			})
 		} else {
 			results[question.id] = 'error';
 			this.setState({
 				answerStateQuestion: { [answerId]: 'error' },
+				answerTotal: 'error',
 				results,
 			})
 		}
@@ -63,6 +66,7 @@ class Quiz extends Component {
 		this.setState({
 			answerNextBtn: false,
 			answerNext: false,
+			answerTotal: null
 		})
 	}
 
@@ -122,6 +126,7 @@ class Quiz extends Component {
 								state={this.state.answerStateQuestion}
 								answerNext={this.state.answerNext}
 								answerNextBtn={this.state.answerNextBtn}
+								answerTotal={this.state.answerTotal}
 								/>
 								</>
 						}

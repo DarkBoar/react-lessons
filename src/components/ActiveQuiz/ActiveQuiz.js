@@ -18,6 +18,7 @@ const ActiveQuiz = props => {
         answers={props.answers}
         state={props.stateAnswer}
         handleAnswer={props.handleAnswer}
+        answerTotal={props.answerTotal}
       />
 
       <div>

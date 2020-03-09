@@ -10,6 +10,7 @@ const AnswersList = props => {
           <AnswerItem
             key={index}
             answer={answer}
+            answerTotal={props.state === index + 1 ? props.answerTotal : null}
             state={props.state === index + 1 ? "active" : ""}
             handleAnswer={props.handleAnswer}
           />

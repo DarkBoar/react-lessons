@@ -7,7 +7,10 @@ const AnswerItem = props => {
   if (props.state) {
     cls.push(props.state)
   }
-
+  if (props.answerTotal) {
+    cls.push(props.answerTotal)
+  }
+  
   return (
     <li
       className={cls.join(" ")}
