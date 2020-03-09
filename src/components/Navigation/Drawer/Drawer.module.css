@@ -1,9 +1,7 @@
 .Drawer {
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  padding: 100px 50px;
+  width: 260px;
+  padding-top: 100px;
+  padding-left: 50px;
   box-sizing: border-box;
   background: #F5F5FA;
 }
@@ -18,13 +16,20 @@
   margin-bottom: 33px;
 }
 .Drawer ul li a {
-  padding-left: 15px;
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: #334D6E;
   font-size: 14px;
   line-height: 16px;
   position: relative;
   transition: .3s;
+}
+.Drawer ul li a svg {
+  margin-right: 14px;
+}
+.Drawer ul li .active path {
+  stroke: #109CF1;
 }
 .Drawer ul li a:hover,
 .Drawer ul li .active {

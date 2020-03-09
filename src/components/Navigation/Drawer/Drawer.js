@@ -1,28 +1,28 @@
 import React, { Component } from "react";
 import classes from "./Drawer.module.css";
 import { NavLink } from "react-router-dom";
-import authIcon from "../../../icons/auth.svg";
-import listIcon from "../../../icons/list-test.svg";
-import createIcon from "../../../icons/create-test.svg";
+import ListTest from "./icons/ListTest";
+import AuthSvg from "./icons/AuthSvg";
+import CreateSvg from "./icons/CreateSvg";
 
 const links = [
   {
     to: '/',
     label: 'Список тестов',
     exact: true,
-    Icon: listIcon
+    Icon: <ListTest />
   },
   {
     to: '/auth',
     label: 'Авторизация',
     exact: false,
-    Icon: authIcon
+    Icon: <AuthSvg />
   },
   {
     to: '/quiz-creator',
     label: 'Создать тест',
     exact: false,
-    Icon: createIcon
+    Icon: <CreateSvg />
   },
 ]
 
@@ -32,15 +32,12 @@ class Drawer extends Component {
     return links.map((item, index) => {
       return (
         <li key={index}>
-          <img
-            src={item.Icon}
-            alt="icon"
-          />
           <NavLink
             to={item.to}
             exact={item.exact}
             activeClassName={classes.active}
           >
+            {item.Icon}
             {item.label}
           </NavLink>
         </li>
