@@ -39,5 +39,17 @@
   font-size: 18px;
   line-height: 23px;
   color: #109CF1;
+  margin-bottom: 60px;
+}
+.Drawer .login {
+  margin-bottom: 60px;
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  color: #90A0B7;
+}
+.Drawer .isLogout {
   margin-bottom: 140px;
 }

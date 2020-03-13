@@ -20,10 +20,11 @@ export function auth(email, password, isLogin) {
     const expirationDate = new Date(new Date().getTime() + data.expiresIn * 1000);
 
     localStorage.setItem('token', data.idToken);
+    localStorage.setItem('nameUser', data.email);
     localStorage.setItem('userId', data.localId);
     localStorage.setItem('expirationDate', expirationDate);
 
-    dispatch(authSuccess(data.idToken));
+    dispatch(authSuccess(data.idToken, data.email));
     dispatch(autoLogout(data.expiresIn));
   }
 }
@@ -38,6 +39,7 @@ export function autoLogout(time) {
 
 export function logout() {
   localStorage.removeItem('token');
+  localStorage.removeItem('nameUser');
   localStorage.removeItem('userId');
   localStorage.removeItem('expirationDate');
   return {
@@ -48,6 +50,7 @@ export function logout() {
 export function autoLogin() {
   return dispatch => {
     const token = localStorage.getItem('token');
+    const isNameLogin = localStorage.getItem('nameUser');
     if (!token) {
       dispatch(logout());
     } else {
@@ -55,16 +58,17 @@ export function autoLogin() {
       if (expirationDate <= new Date()) {
         dispatch(logout());
       } else {
-        dispatch(authSuccess(token));
+        dispatch(authSuccess(token, isNameLogin));
         dispatch(autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000));
       }
     }
   }
 }
 
-export function authSuccess(token) {
+export function authSuccess(token, isNameLogin) {
   return {
     type: AUTH_SUCCESS,
-    token
+    token,
+    isNameLogin
   }
 }

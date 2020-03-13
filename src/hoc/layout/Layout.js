@@ -6,10 +6,12 @@ import { connect } from "react-redux";
 class Layout extends Component {
 
 	render() {
+		console.log(this.props)
 		return (
 			<div className="Layout">
 				<Drawer
 					isAuthenticated={this.props.isAuthenticated}
+					isNameLogin={this.props.isNameLogin}
 				/>
 				<main>
 					{this.props.children}
@@ -18,9 +20,11 @@ class Layout extends Component {
 		)
 	}
 }
+
 function mapStateToProps(state) {
 	return {
-		isAuthenticated: !!state.auth.token
+		isAuthenticated: !!state.auth.token,
+		isNameLogin: state.auth.isNameLogin
 	}
 }
 

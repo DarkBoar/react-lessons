@@ -60,10 +60,18 @@ class Drawer extends Component {
       )
     }
 
+    const cls = [classes.menuTitle];
+    if (!this.props.isAuthenticated) {
+      cls.push(classes.isLogout)
+    }
+
     return (
       <React.Fragment>
         <nav className={classes.Drawer}>
-          <div className={classes.menuTitle}>Меню</div>
+          <div className={cls.join(" ")}>Меню</div>
+          {
+            this.props.isAuthenticated ? <div className={classes.login}>{this.props.isNameLogin}</div> : null
+          }
           <ul>
             {this.renderLinks(links)}
           </ul>
