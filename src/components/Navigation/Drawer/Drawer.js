@@ -5,30 +5,9 @@ import ListTest from "./icons/ListTest";
 import AuthSvg from "./icons/AuthSvg";
 import CreateSvg from "./icons/CreateSvg";
 
-const links = [
-  {
-    to: '/',
-    label: 'Список тестов',
-    exact: true,
-    Icon: <ListTest />
-  },
-  {
-    to: '/auth',
-    label: 'Авторизация',
-    exact: false,
-    Icon: <AuthSvg />
-  },
-  {
-    to: '/quiz-creator',
-    label: 'Создать тест',
-    exact: false,
-    Icon: <CreateSvg />
-  },
-]
-
 class Drawer extends Component {
 
-  renderLinks = () => {
+  renderLinks = (links) => {
     return links.map((item, index) => {
       return (
         <li key={index}>
@@ -37,7 +16,7 @@ class Drawer extends Component {
             exact={item.exact}
             activeClassName={classes.active}
           >
-            {item.Icon}
+            { item.Icon ? item.Icon : null }
             {item.label}
           </NavLink>
         </li>
@@ -47,12 +26,46 @@ class Drawer extends Component {
 
   render() {
 
+    const links = [
+      {
+        to: '/',
+        label: 'Список тестов',
+        exact: true,
+        Icon: <ListTest />
+      }
+    ];
+
+    if (this.props.isAuthenticated) {
+      links.push(
+        {
+          to: '/quiz-creator',
+          label: 'Создать тест',
+          exact: false,
+          Icon: <CreateSvg />
+        },
+        {
+          to: '/logout',
+          label: 'Выйти из системы',
+          exact: false,
+        }
+      )
+    } else {
+      links.push(
+        {
+          to: '/auth',
+          label: 'Авторизация',
+          exact: false,
+          Icon: <AuthSvg />
+        }
+      )
+    }
+
     return (
       <React.Fragment>
         <nav className={classes.Drawer}>
           <div className={classes.menuTitle}>Меню</div>
           <ul>
-            {this.renderLinks()}
+            {this.renderLinks(links)}
           </ul>
         </nav>
       </React.Fragment>

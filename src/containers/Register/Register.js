@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import classes from './Register.module.css';
+import React, { Component } from "react";
+import classes from "./Register.module.css";
 import { Link } from "react-router-dom";
-import Input from '../../components/UI/Input/Input';
-import Axios from "axios";
+import Input from "../../components/UI/Input/Input";
 import is from "is_js";
-import Button from '../../components/UI/Button/Button';
+import Button from "../../components/UI/Button/Button";
+import { connect } from "react-redux";
+import { auth } from "../../store/actions/auth";
 
 class Register extends Component {
 
@@ -68,19 +69,12 @@ class Register extends Component {
     })
   };
 
-  registerHandler = async () => {
-    const authData = {
-      email: this.state.formControls.email.value,
-      password: this.state.formControls.password.value,
-      returnSecureToken: true,
-    }
-    try {
-      const response = await Axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBHhnwoRYlS3nePNyT5c9ZcixVvCjrqtSQ', authData);
-
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+  registerHandler = () => {
+    this.props.auth(
+      this.state.formControls.email.value,
+      this.state.formControls.password.value,
+      false
+    );
   };
 
   validateControl(value, validation) {
@@ -148,4 +142,10 @@ class Register extends Component {
   }
 }
 
-export default Register;
+function mapDispatchToProps(dispatch) {
+  return {
+    auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(Register);

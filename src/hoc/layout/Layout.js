@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import "./Layout.css";
 import Drawer from "../../components/Navigation/Drawer/Drawer";
+import { connect } from "react-redux";
 
 class Layout extends Component {
 
 	render() {
 		return (
 			<div className="Layout">
-				<Drawer />
+				<Drawer
+					isAuthenticated={this.props.isAuthenticated}
+				/>
 				<main>
 					{this.props.children}
 				</main>
@@ -15,5 +18,10 @@ class Layout extends Component {
 		)
 	}
 }
+function mapStateToProps(state) {
+	return {
+		isAuthenticated: !!state.auth.token
+	}
+}
 
-export default Layout;
+export default connect(mapStateToProps)(Layout);
