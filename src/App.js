@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 import Layout from "./hoc/layout/Layout";
 import { Route, Switch } from "react-router-dom";
 import Quiz from "./containers/Quiz/Quiz";
 import QuizList from "./containers/QuizList/QuizList";
 import Auth from "./containers/Auth/Auth";
 import QuizCreator from "./containers/QuizCreator/QuizCreator";
-import Register from './containers/Register/Register';
+import Register from "./containers/Register/Register";
 
 function App() {
   return (
