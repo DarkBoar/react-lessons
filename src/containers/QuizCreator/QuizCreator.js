@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import classes from "./QuizCreator.module.css";
 import Button from "../../components/UI/Button/Button";
 import {createControl, validate, validateForm} from "../../form/formFramework";
@@ -18,8 +18,8 @@ function createOptionControl(number) {
 function createFormControls() {
   return {
     question: createControl({
-      label: 'Введите вопрос',
-      errorMessage: 'Вопрос не может быть пустым'
+      label: "Введите вопрос",
+      errorMessage: "Вопрос не может быть пустым"
     }, {required: true}),
     option1: createOptionControl(1),
     option2: createOptionControl(2),
@@ -31,6 +31,7 @@ function createFormControls() {
 class QuizCreator extends Component {
 
   state = {
+    nameQuiz: "",
     isFormValid: false,
     formControls: createFormControls(),
     rightAnswerId: 1
@@ -74,7 +75,8 @@ class QuizCreator extends Component {
       formControls: createFormControls(),
       rightAnswerId: 1
     })
-    this.props.finishCreateQuiz();
+
+    this.props.finishCreateQuiz(this.state.nameQuiz);
   }
 
   changeHandler = (value, controlName) => {
@@ -118,6 +120,12 @@ class QuizCreator extends Component {
     })
   }
 
+  changeNameTest = event => {
+    this.setState({
+      nameQuiz: event.target.value
+    })
+  }
+
   render() {
     const select = <Select
       label="Выберите правильный ответ"
@@ -135,7 +143,14 @@ class QuizCreator extends Component {
       <div className={classes.QuizCreator}>
         <div>
           <h1>Создать тест</h1>
-
+          <div>
+            <Input
+              label="Тема теста"
+              errorMessage="Введите название теста"
+              value={this.state.nameQuiz}
+              onChange={this.changeNameTest}
+            />
+          </div>
           <form onSubmit={this.submitHandler}>
             <ul>
               {this.renderControls()}
@@ -154,7 +169,11 @@ class QuizCreator extends Component {
                 ? <p
                     onClick={this.addQuestionHandler}
                   >
-                    Добавить еще один вопрос
+                    {
+                      this.props.quiz.length === 0
+                      ? "Добавить вопрос"
+                      : "Добавить еще один вопрос"
+                    }
                   </p>
                 : null
               }
@@ -175,7 +194,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     createQuizQuestion: item => dispatch(createQuizQuestion(item)),
-    finishCreateQuiz: () => dispatch(finishCreateQuiz())
+    finishCreateQuiz: (nameQuiz) => dispatch(finishCreateQuiz(nameQuiz))
   }
 }
 

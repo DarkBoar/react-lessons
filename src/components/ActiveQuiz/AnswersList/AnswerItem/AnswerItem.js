@@ -16,7 +16,9 @@ const AnswerItem = props => {
       className={cls.join(" ")}
       onClick={() => props.handleAnswer(props.answer.id)}
     >
-      { props.answer.text }
+      {
+        props.name ? props.name : props.answer.text
+      }
     </li>
   )
 }

@@ -23,6 +23,7 @@ const FinishedQuiz = props => {
             : <span className={classes.success}>Правильно</span>;
             return (
               <li key={index}>
+                {`${index + 1}. `}
                 {quizItem.question}
                 {cls}
               </li>

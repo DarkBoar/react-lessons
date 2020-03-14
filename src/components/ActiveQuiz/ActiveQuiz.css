@@ -23,3 +23,18 @@
   letter-spacing: 0.02em;
   color: #000000;
 }
+.ActiveQuiz .activeTitle {
+  position: absolute;
+  top: -105px;
+  background: #FDFDFD;
+  border: 1px solid #E3E3E3;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 24px;
+  line-height: 50px;
+  text-align: center;
+  color: #109CF1;
+  width: 100%;
+  max-width: 100%;
+  text-transform: capitalize;
+}

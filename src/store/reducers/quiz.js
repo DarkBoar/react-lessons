@@ -11,6 +11,7 @@ import {
   QUIZ_RETRY
 } from "../actions/actionTypes";
 
+
 const initialState = {
   quizes: [],
   loading: false,

@@ -5,6 +5,7 @@
   line-height: 50px;
   color: #FFFFFF;
   cursor: pointer;
+  border: none;
 }
 .Button:focus {
   outline: none;

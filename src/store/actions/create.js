@@ -14,9 +14,10 @@ export function resetQuizCreation() {
   }
 }
 
-export function finishCreateQuiz() {
+export function finishCreateQuiz(nameQuiz) {
   return async (dispatch, getState) => {
-    await axios.post('https://react-quiz-bc71e.firebaseio.com/quizes.json', getState().create.quiz);
+    const quiz = {name: nameQuiz, quizes: getState().create.quiz}
+    await axios.post('https://react-quiz-bc71e.firebaseio.com/quizes.json', quiz);
     dispatch(resetQuizCreation());
   }
 }

@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 class Layout extends Component {
 
 	render() {
-		console.log(this.props)
 		return (
 			<div className="Layout">
 				<Drawer

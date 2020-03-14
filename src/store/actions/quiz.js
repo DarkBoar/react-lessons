@@ -18,10 +18,11 @@ export function fetchQuizes() {
     try {
       const response = await axios.get('https://react-quiz-bc71e.firebaseio.com/quizes.json');
       const quizes = [];
+
       Object.keys(response.data).forEach((key, index) => {
         quizes.push({
           id: key,
-          name: `Тест №${index + 1}`,
+          name: `Тест ${index + 1} - ${response.data[key].name}`
         })
       })
 
@@ -38,7 +39,7 @@ export function fetchQuizById(quizId) {
 
     try {
 			const response = await axios.get(`https://react-quiz-bc71e.firebaseio.com/quizes/${quizId}.json`);
-			const quiz = response.data;
+      const quiz = response.data;
 
       dispatch(fetchQuizSuccess(quiz));
 		} catch (e) {
@@ -109,7 +110,7 @@ export function nextAnswerClick() {
 }
 
 function isQuizFinished(state) {
-  return state.activeQuestion + 1 === state.quiz.length
+  return state.activeQuestion + 1 === state.quiz.quizes.length
 }
 
 export function isFinishQuiz() {
@@ -128,7 +129,7 @@ export function isNextAnswer(number) {
 export function onSuccessAnswer(answerId) {
   return (dispatch, getState) => {
     const state = getState().quiz;
-    const question = state.quiz[state.activeQuestion];
+    const question = state.quiz.quizes[state.activeQuestion];
 		const results = state.results;
 		
 		if (question.rightAnswerId === answerId) {

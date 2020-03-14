@@ -26,7 +26,7 @@
   margin: 0;
   list-style: none;
 }
-.QuizCreator ul li:first-child {
+.QuizCreator ul li:nth-child(1) {
   width: 100%;
 }
 .QuizCreator ul li {
