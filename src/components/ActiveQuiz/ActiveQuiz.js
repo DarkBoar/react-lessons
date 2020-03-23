@@ -2,7 +2,6 @@ import React from "react";
 import './ActiveQuiz.css';
 import AnswersList from "./AnswersList/AnswersList";
 import Button from "../UI/Button/Button";
-import AnswerItem from "./AnswersList/AnswerItem/AnswerItem";
 
 const ActiveQuiz = props => {
   return (

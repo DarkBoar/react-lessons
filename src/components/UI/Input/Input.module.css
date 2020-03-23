@@ -28,6 +28,6 @@
   font-size: 12px;
   font-weight: bold;
 }
-.Input.invalid label {
+.inputValid input {
   color: #f01f30;
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import classes from "./Input.module.css";
 
 function isInvalid({valid, touched, shouldValidate}) {
@@ -6,12 +6,15 @@ function isInvalid({valid, touched, shouldValidate}) {
 }
 
 const Input = (props) => {
-  const inputType = props.type || 'text'
+  const inputType = props.type || "text";
   const cls = [classes.Input];
-  const htmlFor = `${inputType}-${Math.random()}`
+  const htmlFor = `${inputType}-${Math.random()}`;
 
   if (isInvalid(props)) {
-    cls.push(classes.invalid)
+    cls.push(classes.invalid);
+  }
+  if (props.valid || props.errorMessages) {
+    cls.push(classes.inputValid);
   }
 
   return (

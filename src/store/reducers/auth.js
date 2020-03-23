@@ -1,8 +1,9 @@
-import { AUTH_SUCCESS, AUTH_LOGOUT } from "../actions/actionTypes";
+import { AUTH_SUCCESS, AUTH_LOGOUT, AUTH_ERROR, AUTH_DISABLE_ERROR } from "../actions/actionTypes";
 
 const initialState = {
   token: null,
-  isNameLogin: null
+  isNameLogin: null,
+  errorMessage: null
 }
 
 export default function authReducer(state = initialState, action) {
@@ -18,6 +19,16 @@ export default function authReducer(state = initialState, action) {
         ...state,
         token: null,
         isNameLogin: null
+      }
+    case AUTH_ERROR:
+      return {
+        ...state,
+        errorMessage: action.errorMessage
+      }
+    case AUTH_DISABLE_ERROR:
+      return {
+        ...state,
+        errorMessage: null
       }
     default:
       return state

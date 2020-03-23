@@ -2,47 +2,29 @@ import React, { Component } from "react";
 import classes from "./Register.module.css";
 import { Link } from "react-router-dom";
 import Input from "../../components/UI/Input/Input";
-import is from "is_js";
 import Button from "../../components/UI/Button/Button";
 import { connect } from "react-redux";
-import { auth } from "../../store/actions/auth";
+import { auth, disableErrorMessage } from "../../store/actions/auth";
 
 class Register extends Component {
 
   state = {
+    valid: false,
     formControls: {
       email: {
         value: "",
         type: "email",
-        placeholder: "Электронная почта",
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          email: true,
-        }
+        placeholder: "Электронная почта"
       },
       password: {
         value: "",
         type: "password",
-        placeholder: "Пароль",
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          minLength: 6,
-        }
+        placeholder: "Пароль"
       },
       confirmPassword: {
         value: "",
         type: "password",
-        placeholder: "Повторите пароль",
-        valid: false,
-        touched: false,
-        validation: {
-          required: true,
-          minLength: 6,
-        }
+        placeholder: "Повторите пароль"
       }
     }
   }
@@ -57,12 +39,11 @@ class Register extends Component {
       return (
         <Input
           key={controlName + index}
+          valid={this.state.valid}
           type={control.type}
+          errorMessages={this.props.errorMessage}
           placeholder={control.placeholder}
           value={control.value}
-          valid={control.valid}
-          touched={control.touched}
-          shouldValidate={!!control.validation}
           onChange={event => this.onChangeHandler(event, controlName)}
         />
       )
@@ -70,49 +51,33 @@ class Register extends Component {
   };
 
   registerHandler = () => {
-    this.props.auth(
-      this.state.formControls.email.value,
-      this.state.formControls.password.value,
-      false
-    );
+    const {email, password, confirmPassword} = this.state.formControls;
+
+    if (password.value === confirmPassword.value) {
+      this.props.auth(
+        email.value,
+        password.value,
+        false
+      );
+    } else {
+      this.setState({
+        valid: true
+      })
+    }
   };
 
-  validateControl(value, validation) {
-    if (!validation) {
-      return true;
-    }
-    let isValid = true
-
-    if (validation.required) {
-      isValid = value.trim() !== "" && isValid
-    }
-    if (validation.email) {
-      isValid = is.email(value) && isValid;
-    }
-    if (validation.minLength) {
-      isValid = value.length >= validation.minLength && isValid
-    }
-    return isValid;
-  }
+  componentWillUnmount() {
+		this.props.disableErrorMessage();
+	}
 
   onChangeHandler = (event, controlName) => {
     const formControls = { ...this.state.formControls };
     const control = { ...formControls[controlName] };
-
     control.value = event.target.value;
-    control.touched = true;
-    control.valid = this.validateControl(control.value, control.validation);
-
     formControls[controlName] = control;
-
-    let isFormValid = true;
-
-    Object.keys(formControls).forEach(name => {
-      isFormValid = formControls[name].valid && isFormValid
-    })
-
     this.setState({
-      formControls, isFormValid
+      formControls,
+      valid: false
     });
   };
 
@@ -127,7 +92,6 @@ class Register extends Component {
             <Button
               type="success"
               onClick={this.registerHandler}
-              disabled={!this.state.isFormValid}
             >
               Регистрация
             </Button>
@@ -142,10 +106,17 @@ class Register extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch) {
+function masStateToProps(state) {
   return {
-    auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+    errorMessage: state.auth.errorMessage
   }
 }
 
-export default connect(null, mapDispatchToProps)(Register);
+function mapDispatchToProps(dispatch) {
+  return {
+    auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin)),
+    disableErrorMessage: () => dispatch(disableErrorMessage())
+  }
+}
+
+export default connect(masStateToProps, mapDispatchToProps)(Register);
