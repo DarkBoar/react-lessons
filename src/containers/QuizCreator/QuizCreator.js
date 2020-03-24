@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classes from "./QuizCreator.module.css";
 import Button from "../../components/UI/Button/Button";
-import {createControl, validate, validateForm} from "../../form/formFramework";
+import { createControl } from "../../form/formFramework";
 import { connect } from "react-redux";
 import Input from "../../components/UI/Input/Input";
 import Select from "../../components/UI/Select/Select";
@@ -12,7 +12,7 @@ function createOptionControl(number) {
     label: `Ответ ${number}`,
     errorMessage: "Значение не может быть пустым",
     id: number
-  }, {required: true})
+  }, { required: true })
 }
 
 function createFormControls() {
@@ -20,11 +20,9 @@ function createFormControls() {
     question: createControl({
       label: "Введите вопрос",
       errorMessage: "Вопрос не может быть пустым"
-    }, {required: true}),
+    }, { required: true }),
     option1: createOptionControl(1),
-    option2: createOptionControl(2),
-    option3: createOptionControl(3),
-    option4: createOptionControl(4)
+    option2: createOptionControl(2)
   }
 }
 
@@ -32,9 +30,12 @@ class QuizCreator extends Component {
 
   state = {
     nameQuiz: "",
-    isFormValid: false,
+    rightAnswerId: 1,
     formControls: createFormControls(),
-    rightAnswerId: 1
+    optionSelect: [
+      { text: "Ответ 1", value: 1 },
+      { text: "Ответ 2", value: 2 }
+    ]
   }
 
   submitHandler(event) {
@@ -44,24 +45,25 @@ class QuizCreator extends Component {
   addQuestionHandler = (event) => {
     event.preventDefault();
 
-    const {question, option1, option2, option3, option4} = this.state.formControls;
+    const { question } = this.state.formControls;
+    const formAnswer = { ...this.state.formControls };
+    const answers = [];
+
+    const formAnswerKey = Object.keys(formAnswer).splice(1);
+    formAnswerKey.forEach((item, index) => {
+      answers.push({text: formAnswer[item].value, id: index + 1})
+    })
 
     const questionItem = {
       question: question.value,
       id: this.props.quiz.length + 1,
       rightAnswerId: this.state.rightAnswerId,
-      answers: [
-        {text: option1.value, id: option1.id},
-        {text: option2.value, id: option2.id},
-        {text: option3.value, id: option3.id},
-        {text: option4.value, id: option4.id}
-      ]
+      answers: answers
     }
 
     this.props.createQuizQuestion(questionItem);
 
     this.setState({
-      isFormValid: false,
       formControls: createFormControls(),
       rightAnswerId: 1
     })
@@ -80,18 +82,15 @@ class QuizCreator extends Component {
   }
 
   changeHandler = (value, controlName) => {
-    const formControls = {...this.state.formControls};
-    const control = {...formControls[controlName]};
+    const formControls = { ...this.state.formControls };
+    const control = { ...formControls[controlName] };
 
-    control.touched = true;
     control.value = value;
-    control.valid = validate(control.value, control.validation);
 
-    formControls[controlName] = control
+    formControls[controlName] = control;
 
     this.setState({
-      formControls,
-      isFormValid: validateForm(formControls)
+      formControls
     })
   }
 
@@ -100,15 +99,12 @@ class QuizCreator extends Component {
       const control = this.state.formControls[controlName];
       return (
         <li key={index}>
-        <Input
-          label={control.label}
-          value={control.value}
-          valid={control.valid}
-          shouldValidate={!!control.validation}
-          touched={control.touched}
-          errorMessage={control.errorMessage}
-          onChange={event => this.changeHandler(event.target.value, controlName)}
-        />
+          <Input
+            label={control.label}
+            value={control.value}
+            errorMessage={control.errorMessage}
+            onChange={event => this.changeHandler(event.target.value, controlName)}
+          />
         </li>
       )
     })
@@ -126,17 +122,25 @@ class QuizCreator extends Component {
     })
   }
 
+  addAnswer = () => {
+    const formAnswer = { ...this.state.formControls };
+    const optionSelect = [...this.state.optionSelect];
+
+    optionSelect.push({ text: `Ответ ${optionSelect.length + 1}`, value: optionSelect.length + 1 });
+    formAnswer[`option${optionSelect.length}`] = createOptionControl(optionSelect.length);
+
+    this.setState({
+      formControls: formAnswer,
+      optionSelect
+    })
+  }
+
   render() {
     const select = <Select
       label="Выберите правильный ответ"
       value={this.state.rightAnswerId}
       onChange={this.selectChangeHandler}
-      options={[
-        {text: "Ответ 1", value: 1},
-        {text: "Ответ 2", value: 2},
-        {text: "Ответ 3", value: 3},
-        {text: "Ответ 4", value: 4}
-      ]}
+      options={this.state.optionSelect}
     />
 
     return (
@@ -155,6 +159,16 @@ class QuizCreator extends Component {
             <ul>
               {this.renderControls()}
             </ul>
+            {
+              this.state.optionSelect.length < 6
+              ? <p
+                  className={classes.addQuestion}
+                  onClick={this.addAnswer}
+                >
+                  Добавить еще один вариант ответа
+                </p>
+              : null
+            }
             {select}
             <div className={classes.bottomFlex}>
               <Button
@@ -165,17 +179,15 @@ class QuizCreator extends Component {
                 Создать тест
               </Button>
               {
-                this.state.isFormValid
-                ? <p
-                    onClick={this.addQuestionHandler}
-                  >
-                    {
-                      this.props.quiz.length === 0
+                <p
+                  onClick={this.addQuestionHandler}
+                >
+                  {
+                    this.props.quiz.length === 0
                       ? "Добавить вопрос"
                       : "Добавить еще один вопрос"
-                    }
-                  </p>
-                : null
+                  }
+                </p>
               }
             </div>
           </form>

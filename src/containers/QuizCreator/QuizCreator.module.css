@@ -32,6 +32,11 @@
 .QuizCreator ul li {
   width: 48%;
 }
+.addQuestion {
+  cursor: pointer;
+  color: #109CF1;
+  margin: 25px 0;
+}
 .QuizCreator input:focus {
   border: 1px solid #109CF1;
 }
