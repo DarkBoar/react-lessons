@@ -22,13 +22,25 @@ const Input = (props) => {
       {
         props.label ? <label htmlFor={htmlFor}>{props.label}</label> : null
       }
-      <input
-        type={inputType}
-        id={htmlFor}
-        placeholder={props.placeholder}
-        value={props.value}
-        onChange={props.onChange}
-      />
+      <div className={classes.blockInput}>
+        <input
+          type={inputType}
+          id={htmlFor}
+          placeholder={props.placeholder}
+          value={props.value}
+          onChange={props.onChange}
+        />
+        {
+          props.deleteInput 
+          ? <div
+              className={classes.removeInput}
+              onClick={() => props.removeAnswer(props.indexInput)}
+            >
+              Удалить
+            </div>
+          : null
+        }
+      </div>
       {
         isInvalid(props)
           ? <span>{props.errorMessage || 'Введите верное значение'}</span>

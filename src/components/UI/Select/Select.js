@@ -18,7 +18,7 @@ const Select = (props) => {
               value={option.value}
               key={option.value + index}
             >
-              {option.text}
+              {`Ответ ${index + 1}`}
             </option>
           )
         })}

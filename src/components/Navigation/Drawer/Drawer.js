@@ -66,7 +66,7 @@ class Drawer extends Component {
     }
 
     return (
-      <React.Fragment>
+      <>
         <nav className={classes.Drawer}>
           <div className={cls.join(" ")}>Меню</div>
           {
@@ -76,7 +76,7 @@ class Drawer extends Component {
             {this.renderLinks(links)}
           </ul>
         </nav>
-      </React.Fragment>
+      </>
     )
   }
 }

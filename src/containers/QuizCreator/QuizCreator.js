@@ -7,23 +7,27 @@ import Input from "../../components/UI/Input/Input";
 import Select from "../../components/UI/Select/Select";
 import { createQuizQuestion, finishCreateQuiz } from "../../store/actions/create";
 
-function createOptionControl(number) {
+function createOptionControl(number, deleteInput = 0) {
   return createControl({
-    label: `Ответ ${number}`,
+    type: 'option',
+    deleteInput: deleteInput,
     errorMessage: "Значение не может быть пустым",
     id: number
   }, { required: true })
 }
 
 function createFormControls() {
-  return {
-    question: createControl({
+  const arr = [];
+  arr.push({
+    ...createControl({
+      type: 'question',
       label: "Введите вопрос",
       errorMessage: "Вопрос не может быть пустым"
     }, { required: true }),
-    option1: createOptionControl(1),
-    option2: createOptionControl(2)
-  }
+  })
+  arr.push({ ...createOptionControl(1) }, { ...createOptionControl(2) })
+
+  return arr
 }
 
 class QuizCreator extends Component {
@@ -33,8 +37,8 @@ class QuizCreator extends Component {
     rightAnswerId: 1,
     formControls: createFormControls(),
     optionSelect: [
-      { text: "Ответ 1", value: 1 },
-      { text: "Ответ 2", value: 2 }
+      { value: 1 },
+      { value: 2 }
     ]
   }
 
@@ -51,7 +55,7 @@ class QuizCreator extends Component {
 
     const formAnswerKey = Object.keys(formAnswer).splice(1);
     formAnswerKey.forEach((item, index) => {
-      answers.push({text: formAnswer[item].value, id: index + 1})
+      answers.push({ text: formAnswer[item].value, id: index + 1 })
     })
 
     const questionItem = {
@@ -81,13 +85,9 @@ class QuizCreator extends Component {
     this.props.finishCreateQuiz(this.state.nameQuiz);
   }
 
-  changeHandler = (value, controlName) => {
-    const formControls = { ...this.state.formControls };
-    const control = { ...formControls[controlName] };
-
-    control.value = value;
-
-    formControls[controlName] = control;
+  changeHandler = (value, index) => {
+    const formControls = [ ...this.state.formControls ];
+    formControls[index].value = value;
 
     this.setState({
       formControls
@@ -95,15 +95,18 @@ class QuizCreator extends Component {
   }
 
   renderControls() {
-    return Object.keys(this.state.formControls).map((controlName, index) => {
-      const control = this.state.formControls[controlName];
+    return this.state.formControls.map((controlName, index) => {
+      const { label, value, deleteInput, errorMessage } = controlName
       return (
         <li key={index}>
           <Input
-            label={control.label}
-            value={control.value}
-            errorMessage={control.errorMessage}
-            onChange={event => this.changeHandler(event.target.value, controlName)}
+            indexInput={index}
+            label={label ? label : `Ответ ${index}`}
+            value={value}
+            deleteInput={deleteInput}
+            removeAnswer={this.removeAnswer}
+            errorMessage={errorMessage}
+            onChange={event => this.changeHandler(event.target.value, index)}
           />
         </li>
       )
@@ -122,12 +125,26 @@ class QuizCreator extends Component {
     })
   }
 
+  removeAnswer = (id) => {
+    const optionSelect = [...this.state.optionSelect];
+    const formAnswer = [...this.state.formControls];
+
+    formAnswer.splice(id, 1);
+    optionSelect.pop();
+
+    this.setState({
+      formControls: formAnswer,
+      optionSelect
+    })
+  }
+
   addAnswer = () => {
-    const formAnswer = { ...this.state.formControls };
+    const formAnswer = [...this.state.formControls];
     const optionSelect = [...this.state.optionSelect];
 
-    optionSelect.push({ text: `Ответ ${optionSelect.length + 1}`, value: optionSelect.length + 1 });
-    formAnswer[`option${optionSelect.length}`] = createOptionControl(optionSelect.length);
+    formAnswer.push({ ...createOptionControl(formAnswer.length, 1) });
+    optionSelect.push({value: optionSelect.length + 1})
+
 
     this.setState({
       formControls: formAnswer,
@@ -161,13 +178,13 @@ class QuizCreator extends Component {
             </ul>
             {
               this.state.optionSelect.length < 6
-              ? <p
+                ? <p
                   className={classes.addQuestion}
                   onClick={this.addAnswer}
                 >
                   Добавить еще один вариант ответа
                 </p>
-              : null
+                : null
             }
             {select}
             <div className={classes.bottomFlex}>
