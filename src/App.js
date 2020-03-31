@@ -24,7 +24,7 @@ class App extends Component {
         <Route path="/register" component={Register} />
         <Route path="/quiz/:id" component={Quiz} />
         <Route path="/" exact component={QuizList} />
-        <Redirect to={'/'} />
+        {/* <Redirect to={'/'} /> */}
       </Switch>
     )
     

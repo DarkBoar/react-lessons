@@ -82,7 +82,7 @@ class Auth extends Component {
           <form onSubmit={this.onSubmitHandler} className={classes.AuthForm}>
             {this.renderInputs()}
             <Button
-              type="success" 
+              type="success"
               onClick={this.loginHandler}
             >
               Войти

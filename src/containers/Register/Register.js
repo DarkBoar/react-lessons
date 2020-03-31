@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import classes from "./Register.module.css";
 import { Link } from "react-router-dom";
-import Input from "../../../components/UI/Input/Input";
-import Button from "../../../components/UI/Button/Button";
+import Input from "../../components/UI/Input/Input";
+import Button from "../../components/UI/Button/Button";
 import { connect } from "react-redux";
-import { auth, disableErrorMessage } from "../../../store/actions/auth";
+import { auth, disableErrorMessage } from "../../store/actions/auth";
 
 class Register extends Component {
 
