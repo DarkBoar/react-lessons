@@ -12,12 +12,12 @@ class Auth extends Component {
     valid: false,
     formControls: {
       email: {
-        value: "",
+        value: "admin@mail.ru",
         type: "email",
         placeholder: "Электронная почта"
       },
       password: {
-        value: "",
+        value: "123456",
         type: "password",
         placeholder: "Пароль"
       }

@@ -1,9 +1,6 @@
 .QuizCreator {
-  display: flex;
-  justify-content: center;
+  padding-left: 250px;
   padding-top: 100px;
-  height: 100%;
-  width: 100%;
 }
 .QuizCreator > div {
   width: 100%;
@@ -17,6 +14,7 @@
   letter-spacing: 0.02em;
   text-transform: uppercase;
   color: #000000;
+  margin: 0;
 }
 .QuizCreator ul {
   display: flex;
@@ -26,10 +24,10 @@
   margin: 0;
   list-style: none;
 }
-.QuizCreator ul li:nth-child(1) {
+.QuizCreator form ul li:nth-child(1) {
   width: 100%;
 }
-.QuizCreator ul li {
+.QuizCreator form ul li {
   width: 48%;
 }
 .addQuestion {
@@ -56,4 +54,29 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.listquestion {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nameTest {
+  margin-top: 40px;
+}
+.listquestion li {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  font-size: 24px;
+  line-height: 26px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  margin-bottom: 20px;
+}
+.listquestion li span {
+  font-size: 24px;
+  line-height: 26px;
+  text-align: right;
+  letter-spacing: 0.02em;
+  color: #109CF1;
 }

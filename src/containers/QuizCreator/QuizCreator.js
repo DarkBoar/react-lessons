@@ -36,6 +36,7 @@ class QuizCreator extends Component {
     nameQuiz: "",
     rightAnswerId: 1,
     formControls: createFormControls(),
+    listQuestion: [],
     optionSelect: [
       { value: 1 },
       { value: 2 }
@@ -49,13 +50,50 @@ class QuizCreator extends Component {
   addQuestionHandler = (event) => {
     event.preventDefault();
 
-    const { question } = this.state.formControls;
-    const formAnswer = { ...this.state.formControls };
+    const question = this.state.formControls[0];
+    const formAnswer = [ ...this.state.formControls ];
     const answers = [];
+    
 
-    const formAnswerKey = Object.keys(formAnswer).splice(1);
-    formAnswerKey.forEach((item, index) => {
-      answers.push({ text: formAnswer[item].value, id: index + 1 })
+
+    formAnswer.splice(0, 1);
+    formAnswer.forEach((item, index) => {
+      if (item.value.trim() === "") {
+        console.log("error")
+      } else {
+        answers.push({ text: item.value, id: index + 1 })
+
+        const questionItem = {
+          question: question.value,
+          id: this.props.quiz.length + 1,
+          rightAnswerId: this.state.rightAnswerId,
+          answers: answers
+        }
+    
+        this.props.createQuizQuestion(questionItem);
+    
+        this.setState({
+          listQuestion: [...this.state.listQuestion, questionItem],
+          formControls: createFormControls(),
+          rightAnswerId: 1,
+          optionSelect: [
+            { value: 1 },
+            { value: 2 }
+          ]
+        })
+      }
+    })
+  }
+
+  createQuizHandler = event => {
+    event.preventDefault();
+
+    const question = this.state.formControls[0];
+    const formAnswer = [ ...this.state.formControls ];
+    const answers = [];
+    formAnswer.splice(0, 1);
+    formAnswer.forEach((item, index) => {
+      answers.push({ text: item.value, id: index + 1 })
     })
 
     const questionItem = {
@@ -64,20 +102,12 @@ class QuizCreator extends Component {
       rightAnswerId: this.state.rightAnswerId,
       answers: answers
     }
-
+    
     this.props.createQuizQuestion(questionItem);
 
     this.setState({
-      formControls: createFormControls(),
-      rightAnswerId: 1
-    })
-  }
-
-  createQuizHandler = event => {
-    event.preventDefault();
-
-    this.setState({
       isFormValid: false,
+      listQuestion: [],
       formControls: createFormControls(),
       rightAnswerId: 1
     })
@@ -164,7 +194,19 @@ class QuizCreator extends Component {
       <div className={classes.QuizCreator}>
         <div>
           <h1>Создать тест</h1>
-          <div>
+          <ul className={classes.listquestion}>
+            {
+              this.state.listQuestion.map((item, index) => {
+                return (
+                  <li key={index}>
+                    {item.question}
+                    <span>{item.answers[item.rightAnswerId - 1].text}</span>
+                  </li>
+                )
+              })
+            }
+          </ul>
+          <div className={classes.nameTest}>
             <Input
               label="Тема теста"
               errorMessage="Введите название теста"
@@ -199,11 +241,7 @@ class QuizCreator extends Component {
                 <p
                   onClick={this.addQuestionHandler}
                 >
-                  {
-                    this.props.quiz.length === 0
-                      ? "Добавить вопрос"
-                      : "Добавить еще один вопрос"
-                  }
+                  Добавить еще один вопрос
                 </p>
               }
             </div>

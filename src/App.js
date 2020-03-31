@@ -9,6 +9,7 @@ import Register from "./containers/Register/Register";
 import { connect } from "react-redux";
 import Logout from "./components/Logout/Logout";
 import { autoLogin } from "./store/actions/auth";
+import Tasks from "./containers/Tasks/Tasks";
 
 class App extends Component {
 
@@ -32,6 +33,7 @@ class App extends Component {
         <Switch>
           <Route path="/quiz-creator" component={QuizCreator} />
           <Route path="/quiz/:id" component={Quiz} />
+          <Route path="/tasks" component={Tasks} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={QuizList} />
           <Redirect to={'/'} />
