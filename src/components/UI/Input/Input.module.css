@@ -45,4 +45,5 @@
 }
 .inputValid input {
   color: #f01f30;
+  border: 1px solid #f01f30;
 }

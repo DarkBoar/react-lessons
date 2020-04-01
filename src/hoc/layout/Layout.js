@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./Layout.css";
 import Drawer from "../../components/Navigation/Drawer/Drawer";
 import { connect } from "react-redux";
+import Converter from "../../components/Converter/Converter";
+import Weather from "../../components/Weather/Weather";
 
 class Layout extends Component {
 
@@ -15,6 +17,9 @@ class Layout extends Component {
 				<main>
 					{this.props.children}
 				</main>
+				<div className="converter">
+					<Converter />
+				</div>
 			</div>
 		)
 	}

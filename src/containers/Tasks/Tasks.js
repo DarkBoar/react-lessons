@@ -8,19 +8,29 @@ class Tasks extends Component {
 
   state = {
     value: "",
-    tasks: []
+    tasks: [],
+    valid: false
   }
 
   setValueInput = value => {
-    this.setState({ value: value });
+    if (value !== "") {
+      this.setState({ 
+        value: value,
+        valid: false
+      });
+    } else {
+      this.setState({ 
+        value: value
+      });
+    }
   }
 
   addTaskHandle = () => {
     if (this.state.value === "") {
-      
+      this.setState({ valid: true })
     } else {
       this.setState({
-        tasks: [ ...this.state.tasks, this.state.value ],
+        tasks: [...this.state.tasks, this.state.value],
         value: ""
       })
     }
@@ -33,6 +43,7 @@ class Tasks extends Component {
         <div className={classes.taskContainer}>
           <Input
             value={this.state.value}
+            valid={this.state.valid}
             placeholder="Введите задачу..."
             onChange={event => this.setValueInput(event.target.value)}
           />
@@ -47,7 +58,7 @@ class Tasks extends Component {
           {this.state.tasks.map((item, index) => {
             return (
               <li key={index}>
-                {index + 1}.{item}
+                {index + 1}. {item}
               </li>
             )
           })}
