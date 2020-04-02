@@ -7,6 +7,31 @@ import CreateSvg from "./icons/CreateSvg";
 
 class Drawer extends Component {
 
+  state = {
+    data: ""
+  }
+
+  componentDidMount() {
+    let socket = new WebSocket("wss://ws.blockchain.info/inv");
+
+    socket.onopen = () => {
+      console.log('WebSocket Client Connected')
+      socket.send('{"op":"unconfirmed_sub"}');
+    }
+
+    socket.onmessage = (message) => {
+      const dataFromServer = JSON.parse(message.data);
+      const size = dataFromServer.x;
+      const data = size.size * 0.1
+      console.log(data)
+      if (data < 100) {
+        this.setState({
+          data: data
+        })
+      }
+    };
+  }
+
   renderLinks = (links) => {
     return links.map((item, index) => {
       return (
@@ -49,6 +74,11 @@ class Drawer extends Component {
           exact: false,
         },
         {
+          to: '/heroes',
+          label: 'Звездные войны',
+          exact: false,
+        },
+        {
           to: '/logout',
           label: 'Выйти из системы',
           exact: false,
@@ -80,6 +110,13 @@ class Drawer extends Component {
           <ul>
             {this.renderLinks(links)}
           </ul>
+          <div style={{
+            background: "#109CF1",
+            transition: ".5s",
+            width: `${this.state.data}px`,
+            height: "10px",
+          }}>
+          </div>
         </nav>
       </>
     )

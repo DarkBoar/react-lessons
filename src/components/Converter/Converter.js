@@ -8,13 +8,11 @@ class Converter extends Component {
     valute: []
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const url = "https://www.cbr-xml-daily.ru/daily_json.js";
-    const course = await fetch(url)
+    fetch(url)
       .then(response => response.json())
-    const arrNameCourse = Object.values(course.Valute);
-
-    this.setState({valute: arrNameCourse})
+      .then(data => this.setState({ valute: Object.values(data.Valute) }))
   }
 
   render() {
@@ -27,12 +25,14 @@ class Converter extends Component {
         <ul>
           {
             this.state.valute.map((item, index) => {
-              const number = Math.round((item.Value)*100)/100
+              const number = Math.round((item.Value) * 10) / 10
               return (
-                <li key={index}>
-                  {item.CharCode} - RU
-                  <span>{number}</span>
-                </li>
+                item.CharCode === "USD" || item.CharCode === "EUR"
+                  ? <li key={index}>
+                    {item.CharCode} - RU
+                    <span>{number}</span>
+                  </li>
+                  : null
               )
             })
           }

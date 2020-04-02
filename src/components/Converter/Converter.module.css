@@ -1,5 +1,6 @@
 .listCourse {
   position: relative;
+  background: #fff;
   padding: 20px 0;
 }
 .listCourse:hover .drawerCourse {
@@ -14,8 +15,6 @@
   list-style: none;
   padding: 0 20px;
   margin: 0;
-  height: 500px;
-  overflow: scroll;
 }
 .listCourse ul li {
   display: flex;
@@ -34,6 +33,7 @@
   top: 0;
   left: 0;
   bottom: 0;
+  background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;

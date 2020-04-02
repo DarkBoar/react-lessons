@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import Logout from "./components/Logout/Logout";
 import { autoLogin } from "./store/actions/auth";
 import Tasks from "./containers/Tasks/Tasks";
+import Heroes from "./containers/Heroes/Heroes";
 
 class App extends Component {
 
@@ -34,6 +35,7 @@ class App extends Component {
           <Route path="/quiz-creator" component={QuizCreator} />
           <Route path="/quiz/:id" component={Quiz} />
           <Route path="/tasks" component={Tasks} />
+          <Route path="/heroes" component={Heroes} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={QuizList} />
           <Redirect to={'/'} />
