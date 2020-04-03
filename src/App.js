@@ -10,7 +10,9 @@ import { connect } from "react-redux";
 import Logout from "./components/Logout/Logout";
 import { autoLogin } from "./store/actions/auth";
 import Tasks from "./containers/Tasks/Tasks";
-import Heroes from "./containers/Heroes/Heroes";
+import Heroes from "./containers/StarWars/Heroes";
+import Converter from "./containers/Converter/Converter";
+
 
 class App extends Component {
 
@@ -25,7 +27,6 @@ class App extends Component {
         <Route path="/register" component={Register} />
         <Route path="/quiz/:id" component={Quiz} />
         <Route path="/" exact component={QuizList} />
-        {/* <Redirect to={'/'} /> */}
       </Switch>
     )
     
@@ -36,6 +37,7 @@ class App extends Component {
           <Route path="/quiz/:id" component={Quiz} />
           <Route path="/tasks" component={Tasks} />
           <Route path="/heroes" component={Heroes} />
+          <Route path="/courses" component={Converter} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={QuizList} />
           <Redirect to={'/'} />

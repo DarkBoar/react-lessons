@@ -26,10 +26,8 @@ export function auth(email, password, isLogin) {
         localStorage.setItem('expirationDate', expirationDate);
 
         dispatch(authSuccess(data.idToken, data.email));
-        dispatch(autoLogout(data.expiresIn));
       })
       .catch(error => {
-        // console.log(error.response.data.error)
         const errorMessage = error.response.data.error.message
         dispatch(authError(errorMessage))
       })
@@ -46,14 +44,6 @@ export function authError(errorMessage) {
 export function disableErrorMessage() {
   return {
     type: AUTH_DISABLE_ERROR
-  }
-}
-
-export function autoLogout(time) {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch(logout())
-    }, time * 1000)
   }
 }
 
@@ -79,7 +69,6 @@ export function autoLogin() {
         dispatch(logout());
       } else {
         dispatch(authSuccess(token, isNameLogin));
-        dispatch(autoLogout((expirationDate.getTime() - new Date().getTime()) / 1000));
       }
     }
   }
