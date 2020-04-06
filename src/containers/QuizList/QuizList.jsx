@@ -1,26 +1,21 @@
 import React, { Component } from "react";
-import classes from "./QuizList.module.css";
-import { NavLink } from 'react-router-dom';
-import Loader from "../../components/UI/Loader/Loader";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import classes from "./QuizList.module.css";
+import Loader from "../../components/UI/Loader/Loader";
 import { fetchQuizes } from "../../store/actions/quiz";
 
 class QuizList extends Component {
-
-  renderQuizes = () => {
-    return this.props.quizes.map(quiz => {
-      return (
-        <li key={quiz.id}>
-          <NavLink to={'/quiz/' + quiz.id}>
-            {quiz.name}
-          </NavLink>
-        </li>
-      )
-    })
-  }
+  renderQuizes = () => this.props.quizes.map((quiz) => (
+    <li key={quiz.id}>
+      <NavLink to={`/quiz/${quiz.id}`}>
+        {quiz.name}
+      </NavLink>
+    </li>
+  ))
 
   componentDidMount() {
-    this.props.fetchQuizes()
+    this.props.fetchQuizes();
   }
 
   render() {
@@ -30,11 +25,12 @@ class QuizList extends Component {
           <h1>Список тестов</h1>
           <p>Пройдите тесты</p>
           { this.props.loading && this.props.quizes.length !== 0
-            ? <Loader/>
-            : <ul>
+            ? <Loader />
+            : (
+              <ul>
                 {this.renderQuizes()}
               </ul>
-          }
+            )}
         </div>
       </div>
     );
@@ -44,14 +40,14 @@ class QuizList extends Component {
 function mapStateToPorps(state) {
   return {
     quizes: state.quiz.quizes,
-    loading: state.quiz.loading
-  }
+    loading: state.quiz.loading,
+  };
 }
 
 function mapDispatchToPorps(dispatch) {
   return {
-    fetchQuizes: () => dispatch(fetchQuizes())
-  }
+    fetchQuizes: () => dispatch(fetchQuizes()),
+  };
 }
 
 export default connect(mapStateToPorps, mapDispatchToPorps)(QuizList);

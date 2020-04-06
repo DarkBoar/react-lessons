@@ -1,32 +1,34 @@
 import React, { Component } from "react";
-import classes from "./Register.module.css";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import classes from "./Register.module.css";
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
-import { connect } from "react-redux";
 import { auth, disableErrorMessage } from "../../store/actions/auth";
 
 class Register extends Component {
-
-  state = {
-    valid: false,
-    formControls: {
-      email: {
-        value: "",
-        type: "email",
-        placeholder: "Электронная почта"
+  constructor(props) {
+    super(props);
+    this.state = {
+      valid: false,
+      formControls: {
+        email: {
+          value: "",
+          type: "email",
+          placeholder: "Электронная почта",
+        },
+        password: {
+          value: "",
+          type: "password",
+          placeholder: "Пароль",
+        },
+        confirmPassword: {
+          value: "",
+          type: "password",
+          placeholder: "Повторите пароль",
+        },
       },
-      password: {
-        value: "",
-        type: "password",
-        placeholder: "Пароль"
-      },
-      confirmPassword: {
-        value: "",
-        type: "password",
-        placeholder: "Повторите пароль"
-      }
-    }
+    };
   }
 
   onSubmitHandler = (event) => {
@@ -44,40 +46,44 @@ class Register extends Component {
           errorMessages={this.props.errorMessage}
           placeholder={control.placeholder}
           value={control.value}
-          onChange={event => this.onChangeHandler(event, controlName)}
+          onChange={(event) => this.onChangeHandler(event, controlName)}
         />
-      )
-    })
-  };
+      );
+    });
+  }
 
   registerHandler = () => {
-    const {email, password, confirmPassword} = this.state.formControls;
+    const { email, password, confirmPassword } = this.state.formControls;
 
     if (password.value === confirmPassword.value) {
       this.props.auth(
         email.value,
         password.value,
-        false
+        false,
       );
     } else {
       this.setState({
-        valid: true
-      })
+        valid: true,
+      });
     }
   };
 
   componentWillUnmount() {
-		this.props.disableErrorMessage();
-	}
+    this.props.disableErrorMessage();
+  }
 
   onChangeHandler = (event, controlName) => {
-    const formControls = { ...this.state.formControls };
-    const control = { ...formControls[controlName] };
+    const formControls = {
+      ...this.state.formControls,
+    };
+    const control = {
+      ...formControls[controlName],
+    };
     control.value = event.target.value;
     formControls[controlName] = control;
     this.setState({
       formControls,
-      valid: false
+      valid: false,
     });
   };
 
@@ -96,7 +102,7 @@ class Register extends Component {
               Регистрация
             </Button>
             <div className={classes.bottomRegister}>Уже есть профиль?</div>
-            <Link to={"/auth"} className={classes.enter}>
+            <Link to="/auth" className={classes.enter}>
               Войти
             </Link>
           </form>
@@ -108,15 +114,15 @@ class Register extends Component {
 
 function masStateToProps(state) {
   return {
-    errorMessage: state.auth.errorMessage
-  }
+    errorMessage: state.auth.errorMessage,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin)),
-    disableErrorMessage: () => dispatch(disableErrorMessage())
-  }
+    disableErrorMessage: () => dispatch(disableErrorMessage()),
+  };
 }
 
 export default connect(masStateToProps, mapDispatchToProps)(Register);

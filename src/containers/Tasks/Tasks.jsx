@@ -1,38 +1,42 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import classes from "./Tasks.module.css";
 import Input from "../../components/UI/Input/Input";
-import Button from '../../components/UI/Button/Button';
+import Button from "../../components/UI/Button/Button";
 
 
 class Tasks extends Component {
-
-  state = {
-    value: "",
-    tasks: [],
-    valid: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: "",
+      tasks: [],
+      valid: false,
+    };
   }
 
-  setValueInput = value => {
+  setValueInput = (value) => {
     if (value !== "") {
-      this.setState({ 
-        value: value,
-        valid: false
+      this.setState({
+        value,
+        valid: false,
       });
     } else {
-      this.setState({ 
-        value: value
+      this.setState({
+        value,
       });
     }
   }
 
   addTaskHandle = () => {
     if (this.state.value === "") {
-      this.setState({ valid: true })
+      this.setState({
+        valid: true,
+      });
     } else {
       this.setState({
         tasks: [...this.state.tasks, this.state.value],
-        value: ""
-      })
+        value: "",
+      });
     }
   }
 
@@ -45,7 +49,7 @@ class Tasks extends Component {
             value={this.state.value}
             valid={this.state.valid}
             placeholder="Введите задачу..."
-            onChange={event => this.setValueInput(event.target.value)}
+            onChange={(event) => this.setValueInput(event.target.value)}
           />
           <Button
             type="success"
@@ -55,13 +59,13 @@ class Tasks extends Component {
           </Button>
         </div>
         <ul>
-          {this.state.tasks.map((item, index) => {
-            return (
-              <li key={index}>
-                {index + 1}. {item}
-              </li>
-            )
-          })}
+          {this.state.tasks.map((item, index) => (
+            <li key={index}>
+              {index + 1}
+              .
+              {item}
+            </li>
+          ))}
         </ul>
       </div>
     );

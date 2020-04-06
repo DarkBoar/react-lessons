@@ -1,16 +1,16 @@
 import React from "react";
 import "./AnswerItem.css";
 
-const AnswerItem = props => {
-  const cls = ["Answeritem"]
+const AnswerItem = (props) => {
+  const cls = ["Answeritem"];
 
   if (props.state) {
-    cls.push(props.state)
+    cls.push(props.state);
   }
   if (props.answerTotal) {
-    cls.push(props.answerTotal)
+    cls.push(props.answerTotal);
   }
-  
+
   return (
     <li
       className={cls.join(" ")}
@@ -20,7 +20,7 @@ const AnswerItem = props => {
         props.name ? props.name : props.answer.text
       }
     </li>
-  )
-}
+  );
+};
 
 export default AnswerItem;

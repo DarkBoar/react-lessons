@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import Layout from "./hoc/layout/Layout";
 import { Route, Switch, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import Layout from "./hoc/layout/Layout";
 import Quiz from "./containers/Quiz/Quiz";
 import QuizList from "./containers/QuizList/QuizList";
 import Auth from "./containers/Auth/Auth";
 import QuizCreator from "./containers/QuizCreator/QuizCreator";
 import Register from "./containers/Register/Register";
-import { connect } from "react-redux";
 import Logout from "./components/Logout/Logout";
 import { autoLogin } from "./store/actions/auth";
 import Tasks from "./containers/Tasks/Tasks";
@@ -15,14 +15,13 @@ import Converter from "./containers/Converter/Converter";
 
 
 class App extends Component {
-
   componentDidMount() {
     this.props.autoLogin();
   }
 
   render() {
     let routes;
-    
+
     if (this.props.isAuthenticated) {
       routes = (
         <Switch>
@@ -34,7 +33,7 @@ class App extends Component {
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={QuizList} />
         </Switch>
-      )
+      );
     } else {
       routes = (
         <Switch>
@@ -43,7 +42,7 @@ class App extends Component {
           <Route path="/quiz/:id" component={Quiz} />
           <Route path="/" exact component={QuizList} />
         </Switch>
-      )
+      );
     }
 
     return (
@@ -56,14 +55,14 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: !!state.auth.token
-  }
+    isAuthenticated: !!state.auth.token,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    autoLogin: () => dispatch(autoLogin())
-  }
+    autoLogin: () => dispatch(autoLogin()),
+  };
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

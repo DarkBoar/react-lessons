@@ -2,26 +2,25 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import "./fonts/font/stylesheet.css";
-import App from "./App";
 import { BrowserRouter } from "react-router-dom";
-import * as serviceWorker from "./serviceWorker";
-import {createStore, compose, applyMiddleware} from "redux";
-import {Provider} from "react-redux";
-import rootReducer from "./store/reducers/rootReducer";
+import { createStore, compose, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
 import thunk from "redux-thunk";
+import rootReducer from "./store/reducers/rootReducer";
+import * as serviceWorker from "./serviceWorker";
+import App from "./App";
 
-const composeEnhancers =
-  typeof window === 'object' &&
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?   
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-    }) : compose;
+const composeEnhancers = typeof window === "object"
+  && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+  ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+  }) : compose;
 
 const store = createStore(
   rootReducer,
   composeEnhancers(
-    applyMiddleware(thunk)
-  )
-)
+    applyMiddleware(thunk),
+  ),
+);
 
 const app = (
   <Provider store={store}>
@@ -29,7 +28,7 @@ const app = (
       <App />
     </BrowserRouter>
   </Provider>
-)
+);
 
 ReactDOM.render(app, document.getElementById("root"));
 

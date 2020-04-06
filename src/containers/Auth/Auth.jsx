@@ -1,34 +1,36 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import classes from "./Auth.module.css";
 import Button from "../../components/UI/Button/Button";
 import Input from "../../components/UI/Input/Input";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 import { auth, disableErrorMessage } from "../../store/actions/auth";
 
 class Auth extends Component {
-
-  state = {
-    valid: false,
-    formControls: {
-      email: {
-        value: "admin@mail.ru",
-        type: "email",
-        placeholder: "Электронная почта"
+  constructor(props) {
+    super(props);
+    this.state = {
+      valid: false,
+      formControls: {
+        email: {
+          value: "admin@mail.ru",
+          type: "email",
+          placeholder: "Электронная почта",
+        },
+        password: {
+          value: "123456",
+          type: "password",
+          placeholder: "Пароль",
+        },
       },
-      password: {
-        value: "123456",
-        type: "password",
-        placeholder: "Пароль"
-      }
-    }
-  };
+    };
+  }
 
   loginHandler = () => {
     this.props.auth(
       this.state.formControls.email.value,
       this.state.formControls.password.value,
-      true
+      true,
     );
   };
 
@@ -37,12 +39,16 @@ class Auth extends Component {
   };
 
   componentWillUnmount() {
-		this.props.disableErrorMessage();
-	}
+    this.props.disableErrorMessage();
+  }
 
   onChangeHandler = (event, controlName) => {
-    const formControls = {...this.state.formControls};
-    const control = {...formControls[controlName]};
+    const formControls = {
+      ...this.state.formControls,
+    };
+    const control = {
+      ...formControls[controlName],
+    };
 
     control.value = event.target.value;
     control.touched = true;
@@ -50,7 +56,7 @@ class Auth extends Component {
     formControls[controlName] = control;
 
     this.setState({
-      formControls
+      formControls,
     });
 
     this.props.disableErrorMessage();
@@ -67,11 +73,11 @@ class Auth extends Component {
           errorMessages={this.props.errorMessage}
           placeholder={control.placeholder}
           value={control.value}
-          onChange={event => this.onChangeHandler(event, controlName)}
+          onChange={(event) => this.onChangeHandler(event, controlName)}
         />
-      )
-    })
-  };
+      );
+    });
+  }
 
   render() {
     return (
@@ -88,27 +94,27 @@ class Auth extends Component {
               Войти
             </Button>
             <div className={classes.bottomAuth}>Еще не зарегистрированы?</div>
-            <Link to={"/register"} className={classes.enter}>
+            <Link to="/register" className={classes.enter}>
               Зарегистрироваться
             </Link>
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
 
 function masStateToProps(state) {
   return {
-    errorMessage: state.auth.errorMessage
-  }
+    errorMessage: state.auth.errorMessage,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin)),
-    disableErrorMessage: () => dispatch(disableErrorMessage())
-  }
+    disableErrorMessage: () => dispatch(disableErrorMessage()),
+  };
 }
 
 export default connect(masStateToProps, mapDispatchToProps)(Auth);
