@@ -26,6 +26,7 @@ export function auth(email, password, isLogin) {
         localStorage.setItem('expirationDate', expirationDate);
 
         dispatch(authSuccess(data.idToken, data.email));
+        window.location.pathname = "/"
       })
       .catch(error => {
         const errorMessage = error.response.data.error.message

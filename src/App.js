@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Layout from "./hoc/layout/Layout";
-import { Route, Switch, Redirect, withRouter } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import Quiz from "./containers/Quiz/Quiz";
 import QuizList from "./containers/QuizList/QuizList";
 import Auth from "./containers/Auth/Auth";
@@ -21,14 +21,7 @@ class App extends Component {
   }
 
   render() {
-    let routes = (
-      <Switch>
-        <Route path="/auth" component={Auth} />
-        <Route path="/register" component={Register} />
-        <Route path="/quiz/:id" component={Quiz} />
-        <Route path="/" exact component={QuizList} />
-      </Switch>
-    )
+    let routes;
     
     if (this.props.isAuthenticated) {
       routes = (
@@ -40,7 +33,15 @@ class App extends Component {
           <Route path="/courses" component={Converter} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={QuizList} />
-          <Redirect to={'/'} />
+        </Switch>
+      )
+    } else {
+      routes = (
+        <Switch>
+          <Route path="/auth" component={Auth} />
+          <Route path="/register" component={Register} />
+          <Route path="/quiz/:id" component={Quiz} />
+          <Route path="/" exact component={QuizList} />
         </Switch>
       )
     }
