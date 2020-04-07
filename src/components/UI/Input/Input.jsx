@@ -1,24 +1,17 @@
 import React from "react";
 import classes from "./Input.module.css";
 
-function isInvalid({ valid, touched, shouldValidate }) {
-  return !valid && shouldValidate && touched;
-}
-
 const Input = (
   {
     type, valid, errorMessages, label,
     placeholder, value, onChange, indexInput,
-    deleteInput, removeAnswer, errorMessage,
+    deleteInput, removeAnswer,
   },
 ) => {
   const inputType = type || "text";
   const cls = [classes.Input];
   const htmlFor = `${inputType}-${Math.random()}`;
 
-  if (isInvalid()) {
-    cls.push(classes.invalid);
-  }
   if (valid || errorMessages) {
     cls.push(classes.inputValid);
   }
@@ -39,21 +32,16 @@ const Input = (
         {
           deleteInput
             ? (
-              <div
+              <button
                 className={classes.removeInput}
                 onKeyPress={() => removeAnswer(indexInput)}
               >
                 Удалить
-              </div>
+              </button>
             )
             : null
         }
       </div>
-      {
-        isInvalid()
-          ? <span>{errorMessage || "Введите верное значение"}</span>
-          : null
-      }
     </div>
   );
 };

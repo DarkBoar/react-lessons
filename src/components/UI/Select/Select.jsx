@@ -14,7 +14,7 @@ const Select = ({ label, value, onChange, options }) => {
       >
         {options.map((option, index) => (
           <option
-            key={option.value + index}
+            key={option.value}
             value={option.value}
           >
             {`Ответ ${index + 1}`}

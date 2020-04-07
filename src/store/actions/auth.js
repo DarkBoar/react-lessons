@@ -1,6 +1,21 @@
 import axios from "axios";
 import { AUTH_SUCCESS, AUTH_LOGOUT, AUTH_ERROR, AUTH_DISABLE_ERROR } from "./actionTypes";
 
+export function authError(errorMessage) {
+  return {
+    type: AUTH_ERROR,
+    errorMessage,
+  };
+}
+
+export function authSuccess(token, isNameLogin) {
+  return {
+    type: AUTH_SUCCESS,
+    token,
+    isNameLogin,
+  };
+}
+
 export function auth(email, password, isLogin) {
   return async (dispatch) => {
     const authData = {
@@ -35,13 +50,6 @@ export function auth(email, password, isLogin) {
   };
 }
 
-export function authError(errorMessage) {
-  return {
-    type: AUTH_ERROR,
-    errorMessage,
-  };
-}
-
 export function disableErrorMessage() {
   return {
     type: AUTH_DISABLE_ERROR,
@@ -72,13 +80,5 @@ export function autoLogin() {
         dispatch(authSuccess(token, isNameLogin));
       }
     }
-  };
-}
-
-export function authSuccess(token, isNameLogin) {
-  return {
-    type: AUTH_SUCCESS,
-    token,
-    isNameLogin,
   };
 }

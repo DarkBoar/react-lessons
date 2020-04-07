@@ -32,8 +32,16 @@ module.exports = {
       }
   },
   rules: {
+    "no-console": "off",
+    "no-param-reassign": [0, {"props": false}],
+    "class-methods-use-this": 0,
+    "import/named": 0,
     "quotes": ['error', 'double'],
     "react/prop-types": 0,
+    "react/sort-comp": 0,
+    "react/no-unused-state": 0,
+    "react/no-array-index-key": 0,
+    "react/no-access-state-in-setstate": 0,
     "react/destructuring-assignment": 0,
     "react/button-has-type": 0,
     "object-curly-newline": ["error", {

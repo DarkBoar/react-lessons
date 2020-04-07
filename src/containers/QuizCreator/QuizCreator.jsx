@@ -68,7 +68,6 @@ class QuizCreator extends Component {
     const formAnswer = [...this.state.formControls];
     const answers = [];
 
-
     formAnswer.splice(0, 1);
     formAnswer.forEach((item, index) => {
       if (item.value.trim() === "") {
@@ -245,12 +244,12 @@ class QuizCreator extends Component {
             {
               this.state.optionSelect.length < 6
                 ? (
-                  <p
+                  <button
                     className={classes.addQuestion}
                     onClick={this.addAnswer}
                   >
                     Добавить еще один вариант ответа
-                  </p>
+                  </button>
                 )
                 : null
             }
@@ -263,11 +262,11 @@ class QuizCreator extends Component {
               >
                 Создать тест
               </Button>
-              <p
+              <button
                 onClick={this.addQuestionHandler}
               >
                 Добавить еще один вопрос
-              </p>
+              </button>
             </div>
           </form>
         </div>

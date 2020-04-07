@@ -1,23 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import "./Layout.css";
 import { connect } from "react-redux";
 import Drawer from "../../components/Navigation/Drawer/Drawer";
 
-class Layout extends Component {
-  render() {
-    return (
-      <div className="Layout">
-        <Drawer
-          isAuthenticated={this.props.isAuthenticated}
-          isNameLogin={this.props.isNameLogin}
-        />
-        <main>
-          {this.props.children}
-        </main>
-      </div>
-    );
-  }
-}
+const Layout = (props) => (
+  <div className="Layout">
+    <Drawer
+      isAuthenticated={props.isAuthenticated}
+      isNameLogin={props.isNameLogin}
+    />
+    <main>
+      {props.children}
+    </main>
+  </div>
+);
 
 function mapStateToProps(state) {
   return {

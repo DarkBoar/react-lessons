@@ -10,6 +10,33 @@ import { FETCH_QUIZES_START,
   QUIZ_SET_STATE,
   QUIZ_RETRY } from "./actionTypes";
 
+export function fetchQuizesStart() {
+  return {
+    type: FETCH_QUIZES_START,
+  };
+}
+
+export function fetchQuizesSuccess(quizes) {
+  return {
+    type: FETCH_QUIZES_SUCCESS,
+    quizes,
+  };
+}
+
+export function fetchQuizesError(e) {
+  return {
+    type: FETCH_QUIZES_ERROR,
+    error: e,
+  };
+}
+
+export function fetchQuizSuccess(quiz) {
+  return {
+    type: FETCH_QUIZ_SUCCESS,
+    quiz,
+  };
+}
+
 export function fetchQuizes() {
   return async (dispatch) => {
     dispatch(fetchQuizesStart());
@@ -46,43 +73,6 @@ export function fetchQuizById(quizId) {
   };
 }
 
-export function fetchQuizSuccess(quiz) {
-  return {
-    type: FETCH_QUIZ_SUCCESS,
-    quiz,
-  };
-}
-
-export function fetchQuizesStart() {
-  return {
-    type: FETCH_QUIZES_START,
-  };
-}
-
-export function fetchQuizesSuccess(quizes) {
-  return {
-    type: FETCH_QUIZES_SUCCESS,
-    quizes,
-  };
-}
-
-export function fetchQuizesError(e) {
-  return {
-    type: FETCH_QUIZES_ERROR,
-    error: e,
-  };
-}
-
-export function quizAnswerHandler(answerId) {
-  return (dispatch, getState) => {
-    const state = getState().quiz;
-    if (state.answerNextBtn) {
-      dispatch(quizSetAnswerBtn());
-    }
-    dispatch(quizSetAnswer(answerId));
-  };
-}
-
 export function quizSetAnswerBtn() {
   return {
     type: QUIZ_SET_BUTTON,
@@ -96,14 +86,13 @@ export function quizSetAnswer(answerId) {
   };
 }
 
-export function nextAnswerClick() {
+export function quizAnswerHandler(answerId) {
   return (dispatch, getState) => {
     const state = getState().quiz;
-    if (isQuizFinished(state)) {
-      dispatch(isFinishQuiz());
-    } else {
-      dispatch(isNextAnswer(state.activeQuestion + 1));
+    if (state.answerNextBtn) {
+      dispatch(quizSetAnswerBtn());
     }
+    dispatch(quizSetAnswer(answerId));
   };
 }
 
@@ -121,6 +110,26 @@ export function isNextAnswer(number) {
   return {
     type: QUIZ_NEXT_ANSWER,
     number,
+  };
+}
+
+export function nextAnswerClick() {
+  return (dispatch, getState) => {
+    const state = getState().quiz;
+    if (isQuizFinished(state)) {
+      dispatch(isFinishQuiz());
+    } else {
+      dispatch(isNextAnswer(state.activeQuestion + 1));
+    }
+  };
+}
+
+export function quizSetState(answerState, answerTotal, results) {
+  return {
+    type: QUIZ_SET_STATE,
+    answerState,
+    answerTotal,
+    results,
   };
 }
 
@@ -143,15 +152,6 @@ export function onSuccessAnswer(answerId) {
         [answerId]: "error",
       }, "error", results));
     }
-  };
-}
-
-export function quizSetState(answerState, answerTotal, results) {
-  return {
-    type: QUIZ_SET_STATE,
-    answerState,
-    answerTotal,
-    results,
   };
 }
 

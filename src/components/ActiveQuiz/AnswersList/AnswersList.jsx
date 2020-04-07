@@ -6,7 +6,7 @@ const AnswersList = (props) => (
   <ul className="Answerslist">
     { props.answers.map((answer, index) => (
       <AnswerItem
-        key={index}
+        key={answer}
         answer={answer}
         answerTotal={props.state === index + 1 ? props.answerTotal : null}
         state={props.state === index + 1 ? "active" : ""}

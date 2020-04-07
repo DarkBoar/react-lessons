@@ -6,8 +6,8 @@ import AuthSvg from "./icons/AuthSvg";
 import CreateSvg from "./icons/CreateSvg";
 
 class Drawer extends Component {
-  renderLinks = (links) => links.map((item, index) => (
-    <li key={index}>
+  renderLinks = (links) => links.map((item) => (
+    <li key={item.to}>
       <NavLink
         to={item.to}
         exact={item.exact}

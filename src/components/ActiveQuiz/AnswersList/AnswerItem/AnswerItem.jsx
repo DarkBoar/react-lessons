@@ -12,14 +12,14 @@ const AnswerItem = (props) => {
   }
 
   return (
-    <li
+    <button
       className={cls.join(" ")}
       onClick={() => props.handleAnswer(props.answer.id)}
     >
       {
         props.name ? props.name : props.answer.text
       }
-    </li>
+    </button>
   );
 };
 

@@ -4,9 +4,10 @@ import classes from "./FinishedQuiz.module.css";
 import Button from "../UI/Button/Button";
 
 const FinishedQuiz = (props) => {
-  const successCount = Object.keys(props.results).reduce((total, key) => {
+  const successCount = Object.keys(props.results).reduce((item, key) => {
+    let total = item;
     if (props.results[key] === "success") {
-      total++;
+      total += 1;
     }
     return total;
   }, 0);
@@ -41,7 +42,7 @@ const FinishedQuiz = (props) => {
         <Link to="/">
           <Button type="success">Перейти в список тестов</Button>
         </Link>
-        <div onClick={props.onRetry}>Пройти тест еще раз</div>
+        <button onClick={props.onRetry}>Пройти тест еще раз</button>
       </div>
     </div>
   );

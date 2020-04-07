@@ -46,8 +46,8 @@ class Heroes extends Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {this.state.heroes.map((row, index) => (
-                    <TableRow key={index}>
+                  {this.state.heroes.map((row) => (
+                    <TableRow key={row.name}>
                       <TableCell component="th" scope="row">
                         {row.name}
                       </TableCell>

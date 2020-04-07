@@ -13,11 +13,13 @@ class Auth extends Component {
       valid: false,
       formControls: {
         email: {
+          id: 1,
           value: "admin@mail.ru",
           type: "email",
           placeholder: "Электронная почта",
         },
         password: {
+          id: 2,
           value: "123456",
           type: "password",
           placeholder: "Пароль",
@@ -63,11 +65,11 @@ class Auth extends Component {
   };
 
   renderInputs() {
-    return Object.keys(this.state.formControls).map((controlName, index) => {
+    return Object.keys(this.state.formControls).map((controlName) => {
       const control = this.state.formControls[controlName];
       return (
         <Input
-          key={controlName + index}
+          key={control.id}
           type={control.type}
           valid={this.state.valid}
           errorMessages={this.props.errorMessage}

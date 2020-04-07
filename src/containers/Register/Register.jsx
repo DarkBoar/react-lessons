@@ -13,16 +13,19 @@ class Register extends Component {
       valid: false,
       formControls: {
         email: {
+          id: 1,
           value: "",
           type: "email",
           placeholder: "Электронная почта",
         },
         password: {
+          id: 2,
           value: "",
           type: "password",
           placeholder: "Пароль",
         },
         confirmPassword: {
+          id: 3,
           value: "",
           type: "password",
           placeholder: "Повторите пароль",
@@ -36,11 +39,11 @@ class Register extends Component {
   };
 
   renderInputs() {
-    return Object.keys(this.state.formControls).map((controlName, index) => {
+    return Object.keys(this.state.formControls).map((controlName) => {
       const control = this.state.formControls[controlName];
       return (
         <Input
-          key={controlName + index}
+          key={control.id}
           valid={this.state.valid}
           type={control.type}
           errorMessages={this.props.errorMessage}

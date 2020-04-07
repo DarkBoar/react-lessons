@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { Component } from "react";
 import "./Quiz.css";
 import { connect } from "react-redux";
@@ -20,42 +21,41 @@ class Quiz extends Component {
   }
 
   render() {
-    console.log(this.props.quiz);
     return (
       <div className="Quiz">
         <div className="QuizWrapper">
           {
-						this.props.loading || !this.props.quiz
-						  ? <div className="quizLoader"><Loader /></div>
-						  : this.props.isFinished
-						    ? (
-  <FinishedQuiz
-    results={this.props.results}
-    quiz={this.props.quiz.quizes}
-    onRetry={this.props.retryQuiz}
-  />
-						    )
-						    : (
-  <>
-    <h1>Ответьте на все вопросы</h1>
-    <ActiveQuiz
-      nameQuiz={this.props.quiz.name}
-      answers={this.props.quiz.quizes[this.props.activeQuestion].answers}
-      question={this.props.quiz.quizes[this.props.activeQuestion].question}
-      handleAnswer={this.props.quizAnswerHandler}
-      onAnswerNext={this.props.nextAnswerClick}
-      onAnswerSuccess={this.props.onSuccessAnswer}
-      questionLength={this.props.quiz.quizes.length}
-      answerNumber={this.props.activeQuestion + 1}
-      stateAnswer={this.props.answerState}
-      state={this.props.answerStateQuestion}
-      answerNext={this.props.answerNext}
-      answerNextBtn={this.props.answerNextBtn}
-      answerTotal={this.props.answerTotal}
-    />
-  </>
-						    )
-					}
+            this.props.loading || !this.props.quiz
+              ? <div className="quizLoader"><Loader /></div>
+              : this.props.isFinished
+                ? (
+                  <FinishedQuiz
+                    results={this.props.results}
+                    quiz={this.props.quiz.quizes}
+                    onRetry={this.props.retryQuiz}
+                  />
+                )
+                : (
+                  <>
+                    <h1>Ответьте на все вопросы</h1>
+                    <ActiveQuiz
+                      nameQuiz={this.props.quiz.name}
+                      answers={this.props.quiz.quizes[this.props.activeQuestion].answers}
+                      question={this.props.quiz.quizes[this.props.activeQuestion].question}
+                      handleAnswer={this.props.quizAnswerHandler}
+                      onAnswerNext={this.props.nextAnswerClick}
+                      onAnswerSuccess={this.props.onSuccessAnswer}
+                      questionLength={this.props.quiz.quizes.length}
+                      answerNumber={this.props.activeQuestion + 1}
+                      stateAnswer={this.props.answerState}
+                      state={this.props.answerStateQuestion}
+                      answerNext={this.props.answerNext}
+                      answerNextBtn={this.props.answerNextBtn}
+                      answerTotal={this.props.answerTotal}
+                    />
+                  </>
+                )
+          }
         </div>
       </div>
     );

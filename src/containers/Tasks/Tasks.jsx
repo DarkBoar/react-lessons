@@ -34,7 +34,10 @@ class Tasks extends Component {
       });
     } else {
       this.setState({
-        tasks: [...this.state.tasks, this.state.value],
+        tasks: [...this.state.tasks, {
+          id: this.state.tasks.length + 1,
+          value: this.state.value,
+        }],
         value: "",
       });
     }
@@ -60,7 +63,7 @@ class Tasks extends Component {
         </div>
         <ul>
           {this.state.tasks.map((item, index) => (
-            <li key={index}>
+            <li key={item.id}>
               {index + 1}
               .
               {item}

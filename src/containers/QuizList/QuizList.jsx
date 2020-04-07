@@ -19,12 +19,13 @@ class QuizList extends Component {
   }
 
   render() {
+    const { loading, quizes } = this.props;
     return (
       <div className={classes.QuizList}>
         <div className={classes.quizContainer}>
           <h1>Список тестов</h1>
           <p>Пройдите тесты</p>
-          { this.props.loading && this.props.quizes.length !== 0
+          { loading && quizes.length !== 0
             ? <Loader />
             : (
               <ul>
