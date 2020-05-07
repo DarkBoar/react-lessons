@@ -16,10 +16,10 @@ const FinishedQuiz = (props) => {
     <div className={classes.FinishedQuiz}>
       <h2>Ваш результат</h2>
       <p>
-        Правильно
+        Правильно&nbsp;
         {successCount}
         {" "}
-        из
+        из&nbsp;
         {props.quiz.length}
       </p>
       <ul>
@@ -30,7 +30,7 @@ const FinishedQuiz = (props) => {
               : <span className={classes.success}>Правильно</span>;
             return (
               <li key={index}>
-                {`${index + 1}. `}
+                {`${index + 1}) `}
                 {quizItem.question}
                 {cls}
               </li>

@@ -68,10 +68,13 @@ class QuizCreator extends Component {
     const formAnswer = [...this.state.formControls];
     const answers = [];
     let valid = true;
+
     formAnswer.splice(0, 1);
     formAnswer.forEach((item) => {
       if (item.value.trim() === "") {
         valid = false;
+        // eslint-disable-next-line no-alert
+        alert("заполните все пустые поля!");
       }
     });
     if (valid) {
@@ -115,10 +118,14 @@ class QuizCreator extends Component {
     formAnswer.forEach((item) => {
       if (item.value.trim() === "") {
         valid = false;
+        alert("Заполните все поля!");
       }
     });
 
-    if (valid) {
+    if (this.state.nameQuiz === "") {
+      // eslint-disable-next-line no-alert
+      alert("Заполните тему теста!");
+    } else if (valid) {
       formAnswer.forEach((item, index) => {
         answers.push({
           text: item.value, id: index + 1,
@@ -135,9 +142,10 @@ class QuizCreator extends Component {
         listQuestion: [],
         formControls: createFormControls(),
         rightAnswerId: 1,
+        nameQuiz: "",
       });
+      this.props.finishCreateQuiz(this.state.nameQuiz);
     }
-    this.props.finishCreateQuiz(this.state.nameQuiz);
   }
 
   changeHandler = (value, index) => {
@@ -264,7 +272,7 @@ class QuizCreator extends Component {
               <Button
                 type="success"
                 onClick={this.createQuizHandler}
-                disabled={this.props.quiz.length === 0}
+                disabled={this.state.listQuestion.length === 0}
               >
                 Создать тест
               </Button>

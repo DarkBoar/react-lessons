@@ -5,7 +5,6 @@
 .QuizCreator > div {
   width: 100%;
   max-width: 780px;
-  padding: 0 20px;
 }
 .QuizCreator h1 {
   font-weight: 900;
@@ -32,6 +31,7 @@
 }
 .addQuestion {
   cursor: pointer;
+  outline: none;
   color: #109CF1;
   margin: 25px 0;
   background: transparent;
