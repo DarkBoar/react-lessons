@@ -77,30 +77,28 @@ class QuizCreator extends Component {
         answers.push({
           text: item.value, id: index + 1,
         });
-
-        const questionItem = {
-          question: question.value,
-          id: this.props.quiz.length + 1,
-          rightAnswerId: this.state.rightAnswerId,
-          answers,
-        };
-
-        this.props.createQuizQuestion(questionItem);
-
-        this.setState({
-          listQuestion: [...this.state.listQuestion, questionItem],
-          formControls: createFormControls(),
-          rightAnswerId: 1,
-          optionSelect: [
-            {
-              value: 1,
-            },
-            {
-              value: 2,
-            },
-          ],
-        });
       }
+    });
+    const questionItem = {
+      question: question.value,
+      id: this.props.quiz.length + 1,
+      rightAnswerId: this.state.rightAnswerId,
+      answers,
+    };
+    this.props.createQuizQuestion(questionItem);
+
+    this.setState({
+      listQuestion: [...this.state.listQuestion, questionItem],
+      formControls: createFormControls(),
+      rightAnswerId: 1,
+      optionSelect: [
+        {
+          value: 1,
+        },
+        {
+          value: 2,
+        },
+      ],
     });
   }
 

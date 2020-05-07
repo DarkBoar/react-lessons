@@ -1,5 +1,6 @@
 .Answeritem {
   width: 100%;
+  outline: none;
   max-width: 370px;
   cursor: pointer;
   background: #FDFDFD;
