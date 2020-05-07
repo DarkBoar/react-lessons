@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import classes from "./Auth.module.css";
@@ -84,6 +85,7 @@ class Auth extends Component {
   render() {
     return (
       <div className={classes.Auth}>
+        <Helmet title="Авторизация" />
         <div>
           <h1>Авторизация</h1>
           <p>Авторизуйтесь, чтобы пользоваться программой</p>

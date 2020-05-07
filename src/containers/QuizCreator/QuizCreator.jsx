@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { connect } from "react-redux";
 import classes from "./QuizCreator.module.css";
 import Button from "../../components/UI/Button/Button";
@@ -231,6 +232,7 @@ class QuizCreator extends Component {
 
     return (
       <div className={classes.QuizCreator}>
+        <Helmet title="Создать тест" />
         <div>
           <h1>Создать тест</h1>
           <ul className={classes.listquestion}>

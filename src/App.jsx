@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import Layout from "./hoc/layout/Layout";
@@ -41,6 +42,7 @@ class App extends Component {
 
     return (
       <Layout>
+        <Helmet title="Главная" />
         {routes}
       </Layout>
     );

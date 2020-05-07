@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import classes from "./QuizList.module.css";
@@ -22,6 +23,7 @@ class QuizList extends Component {
     const { loading, quizes } = this.props;
     return (
       <div className={classes.QuizList}>
+        <Helmet title="Список тестов" />
         <div className={classes.quizContainer}>
           <h1>Список тестов</h1>
           <p>Пройдите тесты</p>

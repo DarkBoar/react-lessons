@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import classes from "./Register.module.css";
@@ -93,6 +94,7 @@ class Register extends Component {
   render() {
     return (
       <div className={classes.Register}>
+        <Helmet title="Регистрация" />
         <div>
           <h1>Регистрация</h1>
           <p>Зарегистрируйтесь, чтобы пользоваться программой</p>
