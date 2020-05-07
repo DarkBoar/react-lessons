@@ -8,6 +8,7 @@ const AnswersList = (props) => (
       <AnswerItem
         key={answer.id}
         answer={answer}
+        valid={props.valid}
         answerTotal={props.state === index + 1 ? props.answerTotal : null}
         state={props.state === index + 1 ? "active" : ""}
         handleAnswer={props.handleAnswer}

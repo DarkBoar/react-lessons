@@ -22,6 +22,7 @@ const ActiveQuiz = (props) => (
     <AnswersList
       answers={props.answers}
       state={props.stateAnswer}
+      valid={props.answerNextBtn}
       handleAnswer={props.handleAnswer}
       answerTotal={props.answerTotal}
     />

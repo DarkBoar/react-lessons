@@ -33,6 +33,17 @@
   align-items: center;
   margin-top: 50px;
 }
+.buttonRestart {
+  background: transparent;
+  border: none;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 100%;
+  text-align: center;
+  color: #109CF1;
+  cursor: pointer;
+  margin-left: 50px;
+}
 .bottomBtn a {
   width: 50%;
 }

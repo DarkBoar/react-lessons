@@ -67,39 +67,40 @@ class QuizCreator extends Component {
     const question = this.state.formControls[0];
     const formAnswer = [...this.state.formControls];
     const answers = [];
-
+    let valid = true;
     formAnswer.splice(0, 1);
-    formAnswer.forEach((item, index) => {
+    formAnswer.forEach((item) => {
       if (item.value.trim() === "") {
-        // eslint-disable-next-line no-alert
-        alert("Заполните все поля!");
-      } else {
+        valid = false;
+      }
+    });
+    if (valid) {
+      formAnswer.forEach((item, index) => {
         answers.push({
           text: item.value, id: index + 1,
         });
-      }
-    });
-    const questionItem = {
-      question: question.value,
-      id: this.props.quiz.length + 1,
-      rightAnswerId: this.state.rightAnswerId,
-      answers,
-    };
-    this.props.createQuizQuestion(questionItem);
-
-    this.setState({
-      listQuestion: [...this.state.listQuestion, questionItem],
-      formControls: createFormControls(),
-      rightAnswerId: 1,
-      optionSelect: [
-        {
-          value: 1,
-        },
-        {
-          value: 2,
-        },
-      ],
-    });
+      });
+      const questionItem = {
+        question: question.value,
+        id: this.props.quiz.length + 1,
+        rightAnswerId: this.state.rightAnswerId,
+        answers,
+      };
+      this.props.createQuizQuestion(questionItem);
+      this.setState({
+        listQuestion: [...this.state.listQuestion, questionItem],
+        formControls: createFormControls(),
+        rightAnswerId: 1,
+        optionSelect: [
+          {
+            value: 1,
+          },
+          {
+            value: 2,
+          },
+        ],
+      });
+    }
   }
 
   createQuizHandler = (event) => {
@@ -108,28 +109,34 @@ class QuizCreator extends Component {
     const question = this.state.formControls[0];
     const formAnswer = [...this.state.formControls];
     const answers = [];
+    let valid = true;
+
     formAnswer.splice(0, 1);
-    formAnswer.forEach((item, index) => {
-      answers.push({
-        text: item.value, id: index + 1,
+    formAnswer.forEach((item) => {
+      if (item.value.trim() === "") {
+        valid = false;
+      }
+    });
+
+    if (valid) {
+      formAnswer.forEach((item, index) => {
+        answers.push({
+          text: item.value, id: index + 1,
+        });
       });
-    });
-
-    const questionItem = {
-      question: question.value,
-      id: this.props.quiz.length + 1,
-      rightAnswerId: this.state.rightAnswerId,
-      answers,
-    };
-
-    this.props.createQuizQuestion(questionItem);
-
-    this.setState({
-      listQuestion: [],
-      formControls: createFormControls(),
-      rightAnswerId: 1,
-    });
-
+      const questionItem = {
+        question: question.value,
+        id: this.props.quiz.length + 1,
+        rightAnswerId: this.state.rightAnswerId,
+        answers,
+      };
+      this.props.createQuizQuestion(questionItem);
+      this.setState({
+        listQuestion: [],
+        formControls: createFormControls(),
+        rightAnswerId: 1,
+      });
+    }
     this.props.finishCreateQuiz(this.state.nameQuiz);
   }
 
@@ -262,6 +269,7 @@ class QuizCreator extends Component {
                 Создать тест
               </Button>
               <button
+                className={classes.addQuestion}
                 onClick={this.addQuestionHandler}
               >
                 Добавить еще один вопрос
