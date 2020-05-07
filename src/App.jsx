@@ -9,9 +9,6 @@ import QuizCreator from "./containers/QuizCreator/QuizCreator";
 import Register from "./containers/Register/Register";
 import Logout from "./components/Logout/Logout";
 import { autoLogin } from "./store/actions/auth";
-import Tasks from "./containers/Tasks/Tasks";
-import Heroes from "./containers/StarWars/Heroes";
-import Converter from "./containers/Converter/Converter";
 
 
 class App extends Component {
@@ -27,9 +24,6 @@ class App extends Component {
         <Switch>
           <Route path="/quiz-creator" component={QuizCreator} />
           <Route path="/quiz/:id" component={Quiz} />
-          <Route path="/tasks" component={Tasks} />
-          <Route path="/heroes" component={Heroes} />
-          <Route path="/courses" component={Converter} />
           <Route path="/logout" component={Logout} />
           <Route path="/" exact component={QuizList} />
         </Switch>

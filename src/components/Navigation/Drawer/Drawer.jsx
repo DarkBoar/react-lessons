@@ -39,21 +39,6 @@ class Drawer extends Component {
           Icon: <CreateSvg />,
         },
         {
-          to: "/tasks",
-          label: "Список задач",
-          exact: false,
-        },
-        {
-          to: "/heroes",
-          label: "Звездные войны",
-          exact: false,
-        },
-        {
-          to: "/courses",
-          label: "Курсы валют",
-          exact: false,
-        },
-        {
           to: "/logout",
           label: "Выйти из системы",
           exact: false,

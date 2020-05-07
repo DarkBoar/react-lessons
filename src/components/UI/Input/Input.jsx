@@ -34,7 +34,7 @@ const Input = (
             ? (
               <button
                 className={classes.removeInput}
-                onKeyPress={() => removeAnswer(indexInput)}
+                onClick={() => removeAnswer(indexInput)}
               >
                 Удалить
               </button>

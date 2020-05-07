@@ -71,7 +71,8 @@ class QuizCreator extends Component {
     formAnswer.splice(0, 1);
     formAnswer.forEach((item, index) => {
       if (item.value.trim() === "") {
-        console.log("error");
+        // eslint-disable-next-line no-alert
+        alert("Заполните все поля!");
       } else {
         answers.push({
           text: item.value, id: index + 1,

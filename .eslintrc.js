@@ -32,7 +32,6 @@ module.exports = {
       }
   },
   rules: {
-    "no-console": "off",
     "no-param-reassign": [0, {"props": false}],
     "class-methods-use-this": 0,
     "import/named": 0,
