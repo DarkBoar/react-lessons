@@ -77,8 +77,18 @@
   .Drawer ul li {
     margin: 0;
   }
+  .Drawer .login,
+  .Drawer .menuTitle,
   .Drawer svg,
   .Drawer .isLogout {
     display: none;
+  }
+  .Drawer ul li a:hover {
+    color: #334D6E;
+  }
+}
+@media screen and (max-width: 350px) {
+  .Drawer ul li a {
+    font-size: 12px;
   }
 }

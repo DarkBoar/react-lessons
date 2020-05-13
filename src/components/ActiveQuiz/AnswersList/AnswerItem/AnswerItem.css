@@ -14,10 +14,6 @@
   padding-left: 15px;
   margin-bottom: 15px;
 }
-.Answeritem:hover {
-  border: 1px solid #109CF1;
-  color: #109CF1;
-}
 .Answeritem.active {
   color: #109CF1;
   border: 1px solid #109CF1;
@@ -29,6 +25,12 @@
 .Answeritem.error {
   border: 1px solid #FF0000;
   color: #FF0000;
+}
+@media screen and (min-width: 768px) {
+  .Answeritem:hover {
+    border: 1px solid #109CF1;
+    color: #109CF1;
+  }
 }
 @media screen and (max-width: 767px) {
   .Answeritem {
