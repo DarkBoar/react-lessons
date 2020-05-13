@@ -52,3 +52,18 @@
   line-height: 16px;
   color: #109CF1;
 }
+
+@media screen and (max-width: 767px) {
+  .Auth h1 {
+    font-size: 30px;
+    line-height: 33px;
+  }
+  .Auth p {
+    font-size: 14px;
+    line-height: 15px;
+    margin: 10px 0 30px 0;
+  }
+  .bottomAuth {
+    margin: 30px 0 20px 0;
+  }
+}

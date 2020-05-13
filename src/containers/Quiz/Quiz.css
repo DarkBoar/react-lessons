@@ -1,19 +1,46 @@
 .Quiz {
-    margin-top: 180px;
-    padding-left: 250px;
+  margin-top: 180px;
+  padding-left: 250px;
 }
 .QuizWrapper {
-    position: relative;
-    width: 650px;
+  position: relative;
+  width: 650px;
 }
 .Quiz h1 {
-    font-weight: 900;
-    font-size: 50px;
-    line-height: 55px;
-    letter-spacing: 0.02em;
-    color: #000000;
-    margin: 0;
+  font-weight: 900;
+  font-size: 50px;
+  line-height: 55px;
+  letter-spacing: 0.02em;
+  color: #000000;
+  margin: 0;
 }
 .quizLoader {
-    margin-top: 150px;
+  margin-top: 150px;
+}
+
+@media screen and (max-width: 1200px) {
+  .Quiz {
+    margin: 0;
+    padding: 0 15px;
+    width: 100%;
+  }
+  .ActiveQuiz .activeTitle {
+    display: none;
+  }
+  .QuizWrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .Quiz {
+    margin-top: 90px;
+    padding: 0;
+  }
+  .Quiz h1 {
+    font-size: 30px;
+    line-height: 109%;
+    text-align: center;
+    text-transform: uppercase;
+  }
 }

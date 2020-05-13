@@ -53,3 +53,18 @@
   background: #109CF1;
   border-radius: 10px;
 }
+
+@media screen and (max-width: 767px) {
+  .Register h1 {
+    font-size: 30px;
+    line-height: 33px;
+  }
+  .Register p {
+    font-size: 14px;
+    line-height: 15px;
+    margin: 10px 0 30px 0;
+  }
+  .bottomRegister {
+    margin: 30px 0 20px 0;
+  }
+}

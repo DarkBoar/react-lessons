@@ -48,3 +48,39 @@
 .QuizList li a:hover {
   border: 1px solid #109CF1;
 }
+
+@media screen and (max-width: 1200px) {
+  .QuizList {
+    padding: 0;
+    width: 100%;
+  }
+  .quizContainer {
+    width: auto;
+    max-width: 640px;
+    padding: 0 15px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .quizContainer {
+    width: auto;
+    margin-top: 90px;
+    max-width: 100%;
+    padding: 0;
+  }
+  .QuizList h1 {
+    font-size: 30px;
+    line-height: 109%;
+    text-align: center;
+    color: #000000;
+  }
+  .QuizList p {
+    font-size: 14px;
+    margin: 10px 0 35px;
+    line-height: 109%;
+    text-align: center;
+  }
+  .QuizList li a {
+    font-size: 16px;
+    line-height: 50px;
+  }
+}

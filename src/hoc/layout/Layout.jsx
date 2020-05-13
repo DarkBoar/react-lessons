@@ -9,7 +9,7 @@ const Layout = (props) => (
       isAuthenticated={props.isAuthenticated}
       isNameLogin={props.isNameLogin}
     />
-    <main>
+    <main className="container">
       {props.children}
     </main>
   </div>

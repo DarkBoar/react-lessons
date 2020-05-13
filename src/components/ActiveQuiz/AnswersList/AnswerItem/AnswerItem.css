@@ -30,3 +30,8 @@
   border: 1px solid #FF0000;
   color: #FF0000;
 }
+@media screen and (max-width: 767px) {
+  .Answeritem {
+    max-width: 100%;
+  }
+}

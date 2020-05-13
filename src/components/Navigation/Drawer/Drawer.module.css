@@ -56,3 +56,29 @@
 .Drawer .isLogout {
   margin-bottom: 140px;
 }
+
+@media screen and (max-width: 767px) {
+  .Drawer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: inherit;
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+    background: #F5F5FA;
+  }
+  .Drawer ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px 0;
+  }
+  .Drawer ul li {
+    margin: 0;
+  }
+  .Drawer svg,
+  .Drawer .isLogout {
+    display: none;
+  }
+}

@@ -38,3 +38,18 @@
   max-width: 100%;
   text-transform: capitalize;
 }
+@media screen and (max-width: 767px) {
+  .ActiveQuiz > div {
+    max-width: 100%;
+  }
+  .Question {
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+  .Question small,
+  .Question span {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 15px;
+  }
+}
