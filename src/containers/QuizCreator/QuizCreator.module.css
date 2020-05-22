@@ -85,3 +85,51 @@
   letter-spacing: 0.02em;
   color: #109CF1;
 }
+
+@media screen and (max-width: 1250px) {
+  .QuizCreator {
+    padding: 15px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .QuizCreator {
+    margin-top: 90px;
+    padding: 0;
+  }
+  .QuizCreator h1 {
+    text-align: center;
+    font-size: 30px;
+    line-height: 31px;
+    margin-bottom: 20px;
+  }
+  .nameTest {
+    margin-top: 20px;
+  }
+  .QuizCreator form ul li {
+    width: 100%;
+  }
+  .addQuestion {
+    margin: 15px 0;
+    font-size: 14px;
+  }
+  .listquestion {
+    margin: 0;
+  }
+  .QuizCreator .bottomFlex button {
+    width: 100%;
+    text-align: center;
+  }
+  .bottomFlex {
+    flex-direction: column;
+  }
+  .listquestion li {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 100%;
+    color: #000000;
+  }
+  .listquestion li span {
+    font-size: 14px;
+    line-height: 16px;
+  }
+}

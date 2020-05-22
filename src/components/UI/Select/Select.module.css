@@ -22,3 +22,17 @@
   outline: none;
   transition: all .3s ease-in-out;
 }
+
+@media screen and (max-width: 767px) {
+  .Select {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+  .Select label {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 109%;
+    letter-spacing: 0.02em;
+    color: #000000;
+  }
+}

@@ -16,9 +16,10 @@
   width: 100%;
   font-weight: 300;
   font-size: 16px;
+  line-height: 18px;
   color: #109CF1;
   padding: 0 15px;
-  line-height: 50px;
+  height: 50px;
   background: #FDFDFD;
   border: 1px solid #E3E3E3;
   box-sizing: border-box;
@@ -46,4 +47,14 @@
 .inputValid input {
   color: #f01f30;
   border: 1px solid #f01f30;
+}
+
+@media screen and (max-width: 767px) {
+  .Input label {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 109%;
+    letter-spacing: 0.02em;
+    color: #000000;
+  }
 }
